@@ -43,7 +43,7 @@ const ExperenceSection = () => {
 
          gsap.utils.toArray('.expText').forEach((text) => {
             gsap.from(text, {
-                xPercent: 100,
+                xPercent: 0,
                 opacity: 0,
                 duration: 1,
                 ease: 'Power2.InOut',
@@ -57,7 +57,7 @@ const ExperenceSection = () => {
 
     return (
         <section id='experience' className='w-full md:mt-40 mt-20 section-padding xl:px-0'>
-            <div className='w-full h-full md:px-20 px-5'>
+            <div className='w-full h-full md:px-20'>
                 <TitleHeader
                     title="Work Experience"
                     sub="My Career Overview"
@@ -91,7 +91,7 @@ const ExperenceSection = () => {
                                                 <h1 className='font-semibold text-3xl'>{card.title}</h1>
                                                 <p className='my-5 text-white-50'>{card.date}</p>
                                                 <p className='text-[#839cb5]'>Responsibilities</p>
-                                                <ul className='list-disc mx-5 mt-5 flex flex-col gap-5 text-white-50'>
+                                                <ul className='list-disc mx-1 mt-5 flex flex-col gap-5 text-white-50'>
                                                     {card.responsibilities.map((responsibility) => (
                                                         <li key={responsibility} className='text-lg'>
                                                             {responsibility}
