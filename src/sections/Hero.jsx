@@ -32,7 +32,7 @@ const Hero = () => {
 
       <div className='hero-layout'>
         {/* left side for the text  */}
-        <header className='flex flex-col justify-center items-center md:w-full w-screen md:px-20 px-5'>
+        <header className='flex flex-col justify-center items-start md:w-full w-screen md:px-20 px-5'>
           <div className='flex flex-col gap-7'>
             <div className='hero-text'>
               <h1>Shaping
