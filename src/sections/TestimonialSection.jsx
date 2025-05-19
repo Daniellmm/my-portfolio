@@ -11,7 +11,7 @@ const TestimonialSection = () => {
             title='What Clients Say About Me'
             sub='Testimonials'
             />
-            <div className='lg:columes-3 md:columns-2 columns-1 mt-16'>
+            <div className='md:columns-3 columns-1 mt-16'>
                 {
                     testimonials.map(({name, review}) => (
                         <GlowCard card={{review}}>

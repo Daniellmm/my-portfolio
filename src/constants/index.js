@@ -216,24 +216,24 @@ const skillImages = [
 
 const testimonials = [
   {
-    name: "Esther Howard",
+    name: "Tammi",
     mentions: "@estherhoward",
     review:
-      "I can’t say enough good things about Adrian. He was able to take our complex project requirements and turn them into a seamless, functional website. His problem-solving abilities are outstanding.",
+      "It was a pleasure working with you too! The website turned out beautifully Daniel. Thanks again for your patience and making this sauce launch a success. & I will definitely recommend your work to others",
     imgPath: "/images/client1.png",
   },
   {
-    name: "Wade Warren",
+    name: "RelixCore",
     mentions: "@wadewarren",
     review:
-      "Working with Adrian was a fantastic experience. He transformed our outdated website into a modern, user-friendly platform. His attention to detail and commitment to quality are unmatched. Highly recommend him for any web dev projects.",
+      "Daniel’s work exceeded all expectations! The website is not only beautiful but also functions flawlessly. His patience and expertise made the whole process smooth and stress-free. I can’t thank him enough for making this project a success, and I’ll definitely refer his services to others.",
     imgPath: "/images/client3.png",
   },
   {
-    name: "Guy Hawkins",
+    name: "Hubert",
     mentions: "@guyhawkins",
     review:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
+      "Working with Daniel was fantastic! He brought our vision to life with a stunning website. His attention to detail made all the difference. Thanks to him, our project launch was a huge success, and I’ll absolutely recommend him to others",
     imgPath: "/images/client2.png",
   },
 ];
