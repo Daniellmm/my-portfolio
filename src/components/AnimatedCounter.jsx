@@ -53,12 +53,12 @@ const AnimatedCounter = () => {
                                 end={item.value}
                                 duration={2.5}
                                 start={0}
-                                // redraw={true}
+                                redraw={true}
                                 useEasing={true}
-                                // preserveValue={true}
+                                preserveValue={true}
                                 enableScrollSpy={false}
-                                // scrollSpyDelay={0}
-                                // scrollSpyOnce={true}
+                                scrollSpyDelay={0}
+                                scrollSpyOnce={true}
                             />
                         </div>
                         <div className='text-white-50 text-lg'>

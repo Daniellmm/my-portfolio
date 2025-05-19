@@ -50,11 +50,11 @@ const ShowcaseSection = () => {
                             <h2>RelixCore Digital and Creative Agency</h2>
                             <p className='text-white-50 md:text-xl'>
                                 A comprehensive agency specializing in motion design,</p>
-                            <div className='lg:w-1/2 w-[240px]'>
+                            <div className='lg:w-1/2 w-[240px] hidden lg:block'>
                                 <Button
-                                text={"View Project"}
-                                className='md:w-80 md:h-16 w-60 h-12'
-                            />
+                                    text={"View Project"}
+                                    className='md:w-80 md:h-16 w-60 h-12'
+                                />
                             </div>
                         </div>
                     </div>
@@ -69,9 +69,16 @@ const ShowcaseSection = () => {
                         </div>
                         <div className='project' ref={projectRef3}>
                             <div className='image-wrapper px-1 lg:py-3 bg-[#dcd9a0]'>
-                                <img src="/images/hullsd.png" alt="" />
+                                <img src="/images/admin.png" alt="" />
                             </div>
-                            <h2>Hull's D Sauce Landing Page</h2>
+                            <h2>Attendance Monitoring System</h2>
+                        </div>
+
+                        <div className='lg:w-1/2 w-[240px] lg:hidden'>
+                            <Button
+                                text={"View Project"}
+                                className='md:w-80 md:h-16 w-60 h-12'
+                            />
                         </div>
                     </div>
 

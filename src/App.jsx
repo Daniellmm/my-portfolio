@@ -5,6 +5,7 @@ import Hero from "./sections/Hero"
 import ShowcaseSection from "./sections/ShowcaseSection"
 import ExperenceSection from "./sections/ExperenceSection"
 import TechStack from "./sections/TechStack"
+import TestimonialSection from "./sections/TestimonialSection"
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
       <FeatureCards />
       <ExperenceSection />
       <TechStack />
+      <TestimonialSection />
     </>
   )
 }
