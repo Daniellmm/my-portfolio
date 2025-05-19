@@ -55,13 +55,13 @@ const ShowcaseSection = () => {
                     {/* right side */}
                     <div className='project-list-wrapper overflow-hidden'>
                         <div className='project' ref={projectRef2}>
-                            <div className='image-wrapper bg-[#dcd9a0]'>
+                            <div className='image-wrapper px-1 lg:py-3 bg-[#dcd9a0]'>
                                 <img src="/images/remeda1.png" alt="" />
                             </div>
                             <h2>Remeda Studio Portifolio Creative</h2>
                         </div>
                         <div className='project' ref={projectRef3}>
-                            <div className='image-wrapper bg-[#dcd9a0]'>
+                            <div className='image-wrapper px-1 lg:py-3 bg-[#dcd9a0]'>
                                 <img src="/images/hullsd.png" alt="" />
                             </div>
                             <h2>Hull's D Sauce Landing Page</h2>

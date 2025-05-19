@@ -199,6 +199,21 @@ const expLogos = [
   },
 ];
 
+
+const skillImages = [
+  {imgPath: "/images/logos/react.png"},
+  {imgPath: "/images/logos/node.png"},
+  {imgPath: "/images/logos/html.png"},
+  {imgPath: "/images/logos/css.png"},
+  {imgPath: "/images/logos/js.png"},
+  {imgPath: "/images/logos/nextjs.png"},
+  {imgPath: "/images/logos/git.png"},
+  {imgPath: "/images/logos/api.png"},
+  {imgPath: "/images/logos/three.png"},
+  {imgPath: "/images/logos/express.png"},
+
+]
+
 const testimonials = [
   {
     name: "Esther Howard",
@@ -265,6 +280,7 @@ const socialImgs = [
 
 export {
   words,
+  skillImages,
   abilities,
   logoIconsList,
   counterItems,
