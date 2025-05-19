@@ -43,12 +43,12 @@ const ShowcaseSection = () => {
                     {/* left side */}
                     <div className='first-project-wrapper' ref={projectRef1}>
                         <div className='imnage-wrapper p-5 rounded-xl bg-[#dcd9a0] '>
-                            <img src="/images/remeda1.png" className='rounded-xl' alt="Remeda" />
+                            <img src="/images/relixcore.png" className='rounded-xl' alt="Remeda" />
                         </div>
                         <div className='text-content'>
-                            <h2>Remeda Studio Portifolio Creative..... </h2>
-                            <p className='text-white-50 md:text-xl'>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                Distinctio adipisci debitis delectus facere sit repellat.</p>
+                            <h2>RelixCore Digital and Creative Agency</h2>
+                            <p className='text-white-50 md:text-xl'>
+                                A comprehensive agency specializing in motion design,</p>
                         </div>
                     </div>
 
@@ -56,15 +56,15 @@ const ShowcaseSection = () => {
                     <div className='project-list-wrapper overflow-hidden'>
                         <div className='project' ref={projectRef2}>
                             <div className='image-wrapper bg-[#dcd9a0]'>
-                                <img src="/images/project2.png" alt="" />
+                                <img src="/images/remeda1.png" alt="" />
                             </div>
-                            <h2>Library Management Platform</h2>
+                            <h2>Remeda Studio Portifolio Creative</h2>
                         </div>
                         <div className='project' ref={projectRef3}>
                             <div className='image-wrapper bg-[#dcd9a0]'>
-                                <img src="/images/project3.png" alt="" />
+                                <img src="/images/hullsd.png" alt="" />
                             </div>
-                            <h2>Library Management Platform</h2>
+                            <h2>Hull's D Sauce Landing Page</h2>
                         </div>
                     </div>
 
