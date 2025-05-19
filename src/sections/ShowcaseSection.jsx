@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import Button from '../components/Button';
 
 gsap.registerPlugin(ScrollTrigger);
 const ShowcaseSection = () => {
@@ -10,32 +11,32 @@ const ShowcaseSection = () => {
     const projectRef2 = useRef(null);
     const projectRef3 = useRef(null);
 
-        useGSAP(() => {
-            const projects = [projectRef1.current, projectRef2.current, projectRef3.current];
-            projects.forEach((card, index) => {
-                gsap.fromTo(
-                    card,
-                    {
-                        y: 50, opacity: 0
-                    },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        delay: 0.3 * (index + 1),
-                        scrollTrigger: {
-                            trigger: card,
-                            start: 'top bottom-=100'
-                        }
+    useGSAP(() => {
+        const projects = [projectRef1.current, projectRef2.current, projectRef3.current];
+        projects.forEach((card, index) => {
+            gsap.fromTo(
+                card,
+                {
+                    y: 50, opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    delay: 0.3 * (index + 1),
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top bottom-=100'
                     }
-                )
-            })
-
-            gsap.fromTo(sectionRef.current,
-                { opacity: 0 },
-                { opacity: 1, duration: 1.5 },
-
+                }
             )
-        }, [])
+        })
+
+        gsap.fromTo(sectionRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 1.5 },
+
+        )
+    }, [])
     return (
         <section ref={sectionRef} id='work' className='app-showcase'>
             <div className='w-full'>
@@ -49,6 +50,12 @@ const ShowcaseSection = () => {
                             <h2>RelixCore Digital and Creative Agency</h2>
                             <p className='text-white-50 md:text-xl'>
                                 A comprehensive agency specializing in motion design,</p>
+                            <div className='w-1/2'>
+                                <Button
+                                text={"View Project"}
+                                className='md:w-80 md:h-16 w-60 h-12'
+                            />
+                            </div>
                         </div>
                     </div>
 

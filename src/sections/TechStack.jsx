@@ -27,23 +27,23 @@ const TechStack = () => {
             <div>
               <ul className='flex flex-col gap-5'>
                 <li className='list-disc text-xl text-white-50'>
-                  <span className='text-[#839cb5] font-bold'>Front-End: </span>
+                  <span className='text-white font-bold'>Front-End: </span>
                   HTML, CSS, JavaScript, React.Js, Next.Js.
                 </li>
                 <li className='list-disc text-xl text-white-50'>
-                  <span className='text-[#839cb5] font-bold'>Back-End: </span>
+                  <span className='text-white font-bold'>Back-End: </span>
                   Node.Js, ExpressJs.
                 </li>
                 <li className='list-disc text-xl text-white-50'>
-                  <span className='text-[#839cb5] font-bold'>Databases: </span>
+                  <span className='text-white font-bold'>Databases: </span>
                   MongoDB, MySQL, PostgreSQL.
                 </li>
                 <li className='list-disc text-xl text-white-50'>
-                  <span className='text-[#839cb5] font-bold'>Tools and Platform: </span>
+                  <span className='text-white font-bold'>Tools and Platform: </span>
                   Git, GitHub, Docker, AWS, Firebase, Vercel, Render.
                 </li>
                 <li className='list-disc text-xl text-white-50'>
-                  <span className='text-[#839cb5] font-bold'>Others: </span>
+                  <span className='text-white font-bold'>Others: </span>
                   RESTFUL APIs, GraphQL, WebSockets, Redux, Tailwind CSS.
                 </li>
               </ul>
