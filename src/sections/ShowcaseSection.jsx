@@ -50,7 +50,7 @@ const ShowcaseSection = () => {
                             <h2>RelixCore Digital and Creative Agency</h2>
                             <p className='text-white-50 md:text-xl'>
                                 A comprehensive agency specializing in motion design,</p>
-                            <div className='w-1/2'>
+                            <div className='lg:w-1/2 w-[240px]'>
                                 <Button
                                 text={"View Project"}
                                 className='md:w-80 md:h-16 w-60 h-12'
