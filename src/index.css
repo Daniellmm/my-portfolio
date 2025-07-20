@@ -471,3 +471,122 @@ section {
 .card:hover::before {
   opacity: 1;
 }
+
+
+
+
+/* Mobile menu button - hidden on desktop */
+.mobile-menu-btn {
+  display: none;
+}
+
+/* Hamburger icon styles */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.mobile-menu.open {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 20px;
+}
+
+.mobile-nav li {
+  margin: 15px 0;
+}
+
+.mobile-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.mobile-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-contact a {
+  background-color: your-accent-color;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Hide desktop contact on mobile */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .desktop {
+    display: none;
+  }
+}
+
+/* Show desktop nav on larger screens */
+@media (min-width: 769px) {
+  .mobile-menu-btn,
+  .mobile-menu,
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+}

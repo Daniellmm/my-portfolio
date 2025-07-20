@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Github, ExternalLink, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Button from '../components/Button';
 
 // Import project images
 const relixcoreImage = "/images/relixcore.png";
@@ -267,10 +268,10 @@ const ProjectDetail = () => {
     // Content sections animation
     gsap.fromTo(contentRef.current.children,
       { y: 40, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.8, 
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
         stagger: 0.2,
         ease: "power3.out",
         delay: 0.3,
@@ -306,8 +307,8 @@ const ProjectDetail = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="relative pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link 
-            to="/projects" 
+          <Link
+            to="/projects"
             className="inline-flex items-center gap-2 text-portfolio-text-muted hover:text-portfolio-primary transition-colors mb-8"
           >
             <ArrowLeft size={20} />
@@ -369,7 +370,7 @@ const ProjectDetail = () => {
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-auto rounded-xl shadow-2xl"
+                className="w-full h-auto shadow-2xl border-2 border-[#dcd9a0] p-2 rounded-xl"
               />
             </div>
           </div>
@@ -384,7 +385,7 @@ const ProjectDetail = () => {
             <h2 className="text-3xl font-bold text-portfolio-text mb-8">Tech Stack</h2>
             <div className="flex flex-wrap gap-3">
               {project.techStack.map((tech) => (
-                <span key={tech} className="tech-badge text-base px-4 py-2 bg-red-400/50 rounded-lg">
+                <span key={tech} className="tech-badge text-base px-4 py-2 bg-red-500/10 rounded-lg">
                   {tech}
                 </span>
               ))}
@@ -392,11 +393,11 @@ const ProjectDetail = () => {
           </section>
 
           {/* Key Features */}
-          <section>
+          <section className='max-w-full'>
             <h2 className="text-3xl font-bold text-portfolio-text mb-8">Key Features</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {project.features.map((feature, index) => (
-                <div key={index} className="portfolio-card p-6">
+                <div key={index} className="portfolio-card min-w-full p-6 bg-white/10 rounded-md">
                   <div className="flex items-start gap-4">
                     <div className="w-6 h-6 bg-portfolio-primary rounded-full flex-shrink-0 mt-1 flex items-center justify-center">
                       <div className="w-2 h-2 bg-portfolio-primary-foreground rounded-full"></div>
@@ -409,19 +410,19 @@ const ProjectDetail = () => {
           </section>
 
           {/* Screenshots Gallery */}
-          <section>
+          <section className='max-w-full'>
             <h2 className="text-3xl font-bold text-portfolio-text mb-8">Screenshots Gallery</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {project.gallery.map((image, index) => (
                 <div
                   key={index}
-                  className="portfolio-card overflow-hidden cursor-pointer group"
+                  className="portfolio-card overflow-hidden cursor-pointer group border rounded-md border-[#dcd9a0] p-2"
                   onClick={() => openLightbox(index)}
                 >
                   <img
                     src={image}
                     alt={`${project.title} screenshot ${index + 1}`}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-48 object-cover transition-transform  duration-300 group-hover:scale-110"
                   />
                 </div>
               ))}
@@ -429,7 +430,7 @@ const ProjectDetail = () => {
           </section>
 
           {/* Challenges & Solutions */}
-          <section>
+          <section className='max-w-full'>
             <h2 className="text-3xl font-bold text-portfolio-text mb-8">Challenges & Solutions</h2>
             <div className="space-y-8">
               {project.challenges.map((challenge, index) => (
@@ -446,7 +447,7 @@ const ProjectDetail = () => {
           </section>
 
           {/* Learnings */}
-          <section>
+          <section className='max-w-full'>
             <h2 className="text-3xl font-bold text-portfolio-text mb-8">What I Learned</h2>
             <div className="portfolio-card p-8">
               <ul className="space-y-4">
@@ -461,7 +462,7 @@ const ProjectDetail = () => {
           </section>
 
           {/* Call to Action */}
-          <section className="text-center">
+          <section className="text-center max-w-full bg-white/10 rounded-xl">
             <div className="portfolio-card p-12">
               <h2 className="text-3xl font-bold text-portfolio-text mb-4">
                 Ready to work together?
@@ -470,74 +471,77 @@ const ProjectDetail = () => {
                 I'm always excited to take on new challenges and create amazing digital experiences.
                 Let's discuss your next project.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
+                
                 <Link
                   to="/projects"
                   className="portfolio-button"
-                >
-                  View More Projects
-                </Link>
-                <a
-                  href="mailto:contact@dcodehood.com"
-                  className="px-6 py-3 bg-portfolio-surface border border-portfolio-border rounded-lg font-medium text-portfolio-text hover:bg-portfolio-surface-hover transition-colors"
-                >
-                  Get In Touch
-                </a>
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
-
-      {/* Lightbox */}
-      {isLightboxOpen && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl w-full">
-            <button
-              onClick={() => setIsLightboxOpen(false)}
-              className="absolute top-4 right-4 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors z-10"
             >
-              <X size={24} />
-            </button>
-            
-            <img
-              src={project.gallery[currentImageIndex]}
-              alt={`${project.title} screenshot`}
-              className="w-full h-auto rounded-lg"
-            />
-            
-            {project.gallery.length > 1 && (
-              <>
-                <button
-                  onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
-                >
-                  <ChevronLeft size={24} />
-                </button>
-                <button
-                  onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
-                >
-                  <ChevronRight size={24} />
-                </button>
-              </>
-            )}
-            
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-              {project.gallery.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                  }`}
-                />
-              ))}
+                  View More Projects
+              </Link>
+                
+              <a
+                href="mailto:contact@dcodehood.com"
+                className="px-6 py-3 bg-portfolio-surface border border-portfolio-border rounded-lg font-medium text-portfolio-text hover:bg-portfolio-surface-hover transition-colors"
+              >
+                Get In Touch
+              </a>
             </div>
-          </div>
         </div>
-      )}
+      </section>
     </div>
+      </main >
+
+  {/* Lightbox */ }
+{
+  isLightboxOpen && (
+    <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+      <div className="relative max-w-4xl w-full">
+        <button
+          onClick={() => setIsLightboxOpen(false)}
+          className="absolute top-4 right-4 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors z-10"
+        >
+          <X size={24} />
+        </button>
+
+        <img
+          src={project.gallery[currentImageIndex]}
+          alt={`${project.title} screenshot`}
+          className="w-full h-auto rounded-lg"
+        />
+
+        {project.gallery.length > 1 && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </>
+        )}
+
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {project.gallery.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-2 h-2 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                }`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+    </div >
   );
 };
 
