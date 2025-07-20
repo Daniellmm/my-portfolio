@@ -18,10 +18,12 @@
     "@tailwindcss/vite": "^4.1.6",
     "dotenv": "^16.5.0",
     "gsap": "^3.13.0",
+    "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",
     "react-responsive": "^10.0.1",
+    "react-router-dom": "^7.7.0",
     "tailwindcss": "^4.1.6",
     "three": "^0.176.0"
   },

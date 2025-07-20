@@ -99,6 +99,7 @@ const Contact = () => {
                             </div>
                             <button
                                 disabled={loading}
+                                onClick={handleSubmit}
                                 type="submit">
                                 <div className='cta-button group'>
                                     <div className='bg-circle' />

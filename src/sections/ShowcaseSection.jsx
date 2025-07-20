@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import Button from '../components/Button';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 const ShowcaseSection = () => {
@@ -75,10 +76,13 @@ const ShowcaseSection = () => {
                         </div>
 
                         <div className='lg:w-1/2 w-[240px] lg:hidden'>
-                            <Button
-                                text={"View Project"}
-                                className='md:w-80 md:h-16 w-60 h-12'
-                            />
+                            
+                               <Link href="/project">
+                                 <Button
+                                    text={"View Project"}
+                                    className='md:w-80 md:h-16 w-60 h-12'
+                                />
+                               </Link>
                         </div>
                     </div>
 

@@ -1,27 +1,23 @@
-import LogoSection from "./sections/LogoSection"
+
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import NavBar from "./components/NavBar"
-import FeatureCards from "./sections/FeatureCards"
-import Hero from "./sections/Hero"
-import ShowcaseSection from "./sections/ShowcaseSection"
-import ExperenceSection from "./sections/ExperenceSection"
-import TechStack from "./sections/TechStack"
-import TestimonialSection from "./sections/TestimonialSection"
-import Contact from "./sections/Contact"
+import HomePage from "./pages/HomePage"
+import Projects from "./pages/Projects"
+import ProjectDetail from "./pages/ProjectDetail.jsx";
 
 
 const App = () => {
   return (
-    <>
+
+    <BrowserRouter>
       <NavBar />
-      <Hero />
-      <ShowcaseSection />
-      <LogoSection />
-      <FeatureCards />
-      <ExperenceSection />
-      <TechStack />
-      <TestimonialSection />
-      <Contact />
-    </>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:id" element={<ProjectDetail />} />
+      </Routes>
+    </BrowserRouter>
+
   )
 }
 
