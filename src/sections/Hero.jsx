@@ -85,7 +85,9 @@ const Hero = () => {
         {/* i think for now i will add anothen thing here */}
 
       </div>
-      <AnimatedCounter />
+      <div className='mt-24 md:mt-5'>
+        <AnimatedCounter />
+      </div>
     </section>
   )
 }
