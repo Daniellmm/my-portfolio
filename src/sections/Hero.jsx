@@ -30,7 +30,7 @@ const Hero = () => {
         <img src="/images/bg.png" alt="backgroung" />
       </div>
 
-      <div className='hero-layout '>
+      <div className='hero-layout flex flex-col md:flex-row justify-center items-center gap-y-10'>
         {/* left side for the text  */}
         <header className='flex flex-co justify-center items-start md:w-full w-screen md:px-20 px-5'>
           <div className='flex flex-col gap-7'>
