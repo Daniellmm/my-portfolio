@@ -3,14 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, Github, ExternalLink, Filter, ArrowLeft } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Import project images
-const relixcoreImage = "/images/relixcore.png";
-const remedaImage = "/images/remeda1.png";
-const attendanceImage = "/images/admin.png";
-
-
-
+import { sanity } from '../lib/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,90 +13,49 @@ const Projects = () => {
   const containerRef = useRef(null);
   const headerRef = useRef(null);
   const cardsRef = useRef([]);
+  const [projectsData, setProjectsData] = useState([]);
+  const [loading, setLoading] = useState(false)
 
-  const projectsData = [
-    {
-      id: 'relixcore',
-      title: 'RelixCore Digital Agency',
-      summary: 'A comprehensive agency specializing in motion design and creative services.',
-      image: relixcoreImage,
-      tags: ['React', 'Next.js', 'GSAP', 'Tailwind'],
-      category: 'Client Work',
-      githubUrl: 'https://github.com/username/relixcore',
-      liveUrl: 'https://relixcore.com',
-      featured: true
-    },
-    {
-      id: 'remeda',
-      title: 'Remeda Studio Portfolio',
-      summary: 'Creative portfolio showcasing stunning photography and visual art.',
-      image: remedaImage,
-      tags: ['React', 'Framer Motion', 'Tailwind', 'Vercel'],
-      category: 'Frontend',
-      githubUrl: 'https://github.com/username/remeda',
-      liveUrl: 'https://remeda.studio',
-      featured: true
-    },
-    {
-      id: 'attendance',
-      title: 'Attendance Monitoring System',
-      summary: 'Real-time employee attendance tracking with advanced analytics.',
-      image: attendanceImage,
-      tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-      category: 'Fullstack',
-      githubUrl: 'https://github.com/username/attendance',
-      liveUrl: 'https://attendance-system.com',
-      featured: false
-    },
-    // {
-    //   id: 'ecommerce',
-    //   title: 'E-Commerce Platform',
-    //   summary: 'Modern online store with payment integration and inventory management.',
-    //   image: ecommerceImage,
-    //   tags: ['React', 'Stripe', 'Supabase', 'Tailwind'],
-    //   category: 'Fullstack',
-    //   githubUrl: 'https://github.com/username/ecommerce',
-    //   liveUrl: 'https://shop-demo.com',
-    //   featured: false
-    // },
-    // {
-    //   id: 'taskmanager',
-    //   title: 'Project Task Manager',
-    //   summary: 'Collaborative task management with real-time updates and team features.',
-    //   image: taskmanagerImage,
-    //   tags: ['React', 'Firebase', 'Material-UI', 'Redux'],
-    //   category: 'Frontend',
-    //   githubUrl: 'https://github.com/username/taskmanager',
-    //   liveUrl: 'https://taskmanager.app',
-    //   featured: false
-    // },
-    // {
-    //   id: 'restaurant',
-    //   title: 'Restaurant Booking System',
-    //   summary: 'Table reservation platform with menu management and customer reviews.',
-    //   image: restaurantImage,
-    //   tags: ['React', 'Node.js', 'PostgreSQL', 'Socket.io'],
-    //   category: 'Fullstack',
-    //   githubUrl: 'https://github.com/username/restaurant',
-    //   liveUrl: 'https://restaurant-booking.com',
-    //   featured: false
-    // }
-  ];
 
   const categories = ['All', 'Featured', 'Client Work', 'Fullstack', 'Frontend'];
 
-  const filteredProjects = projectsData.filter(project => {
-    const matchesFilter = selectedFilter === 'All' || 
-      (selectedFilter === 'Featured' && project.featured) ||
-      project.category === selectedFilter;
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesFilter && matchesSearch;
-  });
+
+  useEffect(() => {
+    setLoading(true)
+    sanity.fetch(`*[_type == "project"] | order(_createdAt desc) {
+    _id,
+    title,
+    "id": slug.current,
+    summary,
+    "image": image.asset->url,
+    tags,
+    category,
+    githubUrl,
+    liveUrl,
+    featured
+  }`).then((data) => {
+      console.log("📦 Projects fetched from Sanity:", data);
+      setProjectsData(data);
+    }).catch((err) => {
+      console.error("Error fetching projects:", err)
+    }).finally(() => setLoading(false))
+  }, []);
+
+  const filteredProjects = projectsData;
+
+
+  // const filteredProjects = projectsData.filter(project => {
+  //   const matchesFilter = selectedFilter === 'All' || 
+  //     (selectedFilter === 'Featured' && project.featured) ||
+  //     project.category === selectedFilter;
+  //   const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+  //   return matchesFilter && matchesSearch;
+  // });
 
   useEffect(() => {
     // Header animation
-    gsap.fromTo(headerRef.current, 
+    gsap.fromTo(headerRef.current,
       { y: -50, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
     );
@@ -111,10 +63,10 @@ const Projects = () => {
     // Cards animation
     gsap.fromTo(cardsRef.current,
       { y: 60, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.8, 
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
         stagger: 0.1,
         ease: "power3.out",
         delay: 0.3
@@ -124,7 +76,7 @@ const Projects = () => {
     // Scroll-triggered animations
     ScrollTrigger.batch(cardsRef.current, {
       onEnter: (elements) => {
-        gsap.fromTo(elements, 
+        gsap.fromTo(elements,
           { y: 60, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out" }
         );
@@ -150,18 +102,18 @@ const Projects = () => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-background pt-20">
+    <div ref={containerRef} className="min-h-screen bg-black pt-20">
       {/* Header */}
       <header ref={headerRef} className="pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-portfolio-text-muted hover:text-portfolio-primary transition-colors mb-8"
           >
             <ArrowLeft size={20} />
             Back to Home
           </Link>
-          
+
           <div className="text-center mb-12">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="hero-gradient">Selected Work</span>
@@ -193,11 +145,10 @@ const Projects = () => {
                 <button
                   key={category}
                   onClick={() => setSelectedFilter(category)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedFilter === category
-                      ? 'bg-portfolio-primary text-portfolio-primary-foreground'
-                      : 'bg-portfolio-surface text-portfolio-text-muted hover:bg-portfolio-surface-hover'
-                  }`}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedFilter === category
+                    ? 'bg-portfolio-primary text-portfolio-primary-foreground'
+                    : 'bg-portfolio-surface text-portfolio-text-muted hover:bg-portfolio-surface-hover'
+                    }`}
                 >
                   {category}
                 </button>
@@ -208,92 +159,103 @@ const Projects = () => {
       </header>
 
       {/* Projects Grid */}
-      <main className="pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredProjects.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-xl text-portfolio-text-muted">No projects found matching your criteria.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {filteredProjects.map((project, index) => (
-                <div
-                  key={project.id}
-                  ref={addToRefs}
-                  className="portfolio-card group  border-2 border-[#dcd9a0] p-2 rounded-xl"
-                >
-                  {/* Project Image */}
-                  <div className="relative overflow-hidden aspect-video ">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Action buttons */}
-                    <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 bg-background/90 backdrop-blur-sm rounded-lg text-foreground hover:bg-portfolio-primary hover:text-portfolio-primary-foreground transition-colors"
-                      >
-                        <Github size={16} />
-                      </a>
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 bg-background/90 backdrop-blur-sm rounded-lg text-foreground hover:bg-portfolio-primary hover:text-portfolio-primary-foreground transition-colors"
-                      >
-                        <ExternalLink size={16} />
-                      </a>
-                    </div>
-
-                    {project.featured && (
-                      <div className="absolute top-4 left-4">
-                        <span className="px-2 py-1 bg-portfolio-primary text-portfolio-primary-foreground text-xs font-medium rounded-full">
-                          Featured
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Project Info */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-portfolio-text mb-2 group-hover:text-portfolio-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-portfolio-text-muted mb-4 line-clamp-2">
-                      {project.summary}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="tech-badge">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* View Project Link */}
-                    <Link
-                      to={`/projects/${project.id}`}
-                      className="inline-flex items-center gap-2 text-red-600 text-portfolio-primary hover:text-portfolio-primary-dark font-medium transition-colors"
-                    >
-                      View Project
-                      <ExternalLink size={16} />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+      {loading ? (
+        <div className="h-screen flex justify-center items-center">
+          <div className="w-12 h-12 border-4 border-t-portfolio-primary border-portfolio-surface rounded-full animate-spin" />
         </div>
-      </main>
-    </div>
+      ) : (
+        <main className="pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {filteredProjects.length === 0 ? (
+              <div className="text-center py-16">
+                <p className="text-xl text-portfolio-text-muted">No projects found matching your criteria.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                {filteredProjects.map((project) => (
+
+                  <div
+                    key={project.id}
+                    ref={addToRefs}
+                    className="portfolio-card group  border-2 border-[#dcd9a0] p-2 rounded-xl"
+                  >
+                    {/* Project Image */}
+                    <div className="relative overflow-hidden aspect-video ">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      {/* Action buttons */}
+                      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 bg-background/90 backdrop-blur-sm rounded-lg text-foreground hover:bg-portfolio-primary hover:text-portfolio-primary-foreground transition-colors"
+                        >
+                          <Github size={16} />
+                        </a>
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 bg-background/90 backdrop-blur-sm rounded-lg text-foreground hover:bg-portfolio-primary hover:text-portfolio-primary-foreground transition-colors"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      </div>
+
+                      {project.featured && (
+                        <div className="absolute top-4 left-4">
+                          <span className="px-2 py-1 bg-portfolio-primary text-portfolio-primary-foreground text-xs font-medium rounded-full">
+                            Featured
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Project Info */}
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-portfolio-text mb-2 group-hover:text-portfolio-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-portfolio-text-muted mb-4 line-clamp-2">
+                        {project.summary}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {Array.isArray(project.tags) && project.tags.length > 0 ? (
+                          project.tags.map((tag) => (
+                            <span key={tag} className="tech-badge">{tag}</span>
+                          ))
+                        ) : (
+                          <span className="text-xs text-gray-400 italic">No tags</span>
+                        )}
+
+                      </div>
+
+                      {/* View Project Link */}
+                      <Link
+                        to={`/projects/${project.id}`}
+                        className="inline-flex items-center gap-2 text-red-600 text-portfolio-primary hover:text-portfolio-primary-dark font-medium transition-colors"
+                        onClick={() => console.log("Navigating to:", `/projects/${project.id}`)}  // Debug log
+                      >
+                        View Project
+                        <ExternalLink size={16} />
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </main >
+      )}
+    </div >
   );
 };
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { words } from '../constants'
 import Button from '../components/Button'
 import HeroExperience from '../components/HeroModels/HeroExperience'
-import {useGSAP} from '@gsap/react'
+import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import AnimatedCounter from '../components/AnimatedCounter'
 
@@ -30,16 +30,16 @@ const Hero = () => {
         <img src="/images/bg.png" alt="backgroung" />
       </div>
 
-      <div className='hero-layout'>
+      <div className='hero-layout '>
         {/* left side for the text  */}
-        <header className='flex flex-col justify-center items-start md:w-full w-screen md:px-20 px-5'>
+        <header className='flex flex-co justify-center items-start md:w-full w-screen md:px-20 px-5'>
           <div className='flex flex-col gap-7'>
             <div className='hero-text'>
               <h1>Shaping
                 <span className='slide'>
                   <span className='wrapper'>
                     {words.map((word) => (
-                      <span key={word.text} className='flex items-center gap-1 md:gap-3 pb-2'>
+                      <span key={word.text} className='flex items-center pr-5 gap-1 md:gap-3 pb-2'>
                         <img src={word.imgPath}
                           alt={word.text}
                           className='xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white/50'
@@ -69,6 +69,12 @@ const Hero = () => {
           </div>
         </header>
 
+        <div className='w-full flex justify-center items-center '>
+          <div className=' h-[350px] w-[350px] rounded-[100%]'>
+            <img src="/images/dcoder.png" alt="" className='h-full w-full rounded-full' />
+          </div>
+        </div>
+
         {/* right side for the 3d model */}
         {/* <figure>
           <div className='hero-3d-layout'>
@@ -77,7 +83,7 @@ const Hero = () => {
         </figure> */}
 
         {/* i think for now i will add anothen thing here */}
-        
+
       </div>
       <AnimatedCounter />
     </section>

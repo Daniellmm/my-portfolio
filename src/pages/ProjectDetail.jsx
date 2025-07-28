@@ -4,11 +4,7 @@ import { ArrowLeft, Github, ExternalLink, ChevronLeft, ChevronRight, X } from 'l
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from '../components/Button';
-
-// Import project images
-const relixcoreImage = "/images/relixcore.png";
-const remedaImage = "/images/remeda1.png";
-const attendanceImage = "/images/admin.png";
+import { sanity } from '../lib/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,247 +13,89 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
   const heroRef = useRef(null);
   const contentRef = useRef(null);
 
-  const projectsData = {
-    'relixcore': {
-      id: 'relixcore',
-      title: 'RelixCore Digital & Creative Agency',
-      subtitle: 'Full-stack agency website with motion design',
-      description: 'RelixCore is a comprehensive digital agency specializing in motion design, web development, and creative services. The project involved creating a sophisticated agency website that showcases their portfolio while providing seamless user experience and professional presentation.',
-      image: relixcoreImage,
-      gallery: [relixcoreImage, relixcoreImage, relixcoreImage],
-      techStack: ['React', 'Next.js', 'GSAP', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
-      githubUrl: 'https://github.com/username/relixcore',
-      liveUrl: 'https://relixcore.com',
-      features: [
-        'Motion-designed landing page with smooth animations',
-        'Dynamic portfolio showcase with filtering capabilities',
-        'Contact form with email integration',
-        'SEO-optimized pages with meta tags',
-        'Responsive design for all device sizes',
-        'Fast loading with optimized images and code splitting'
-      ],
-      challenges: [
-        {
-          title: 'Complex Animation Sequencing',
-          description: 'Implementing sophisticated GSAP animations that work seamlessly across different devices and screen sizes while maintaining performance.'
-        },
-        {
-          title: 'Performance Optimization',
-          description: 'Ensuring fast load times despite heavy use of animations and high-quality images through lazy loading and code optimization.'
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setLoading(true);
+        console.log("Fetching project with slug:", id);
+        
+        const data = await sanity.fetch(
+          `*[_type == "project" && slug.current == $slug][0] { 
+            _id,
+            title,
+            description,
+            "image": image.asset->url,
+            "gallery": gallery[].asset->url,
+            techStack,
+            githubUrl,
+            liveUrl,
+            features,
+            challenges,
+            learnings,
+            tags,
+            category,
+            featured,
+            // Add default values for missing fields
+            "subtitle": coalesce(subtitle, ""),
+            "duration": coalesce(duration, "Not specified"),
+            "role": coalesce(role, "Developer"),
+            "client": coalesce(client, "Personal Project")
+          }`,
+          { slug: id }
+        );
+        
+        console.log("Fetched project data:", data);
+        
+        if (!data) {
+          console.log("No project found, redirecting to projects page");
+          navigate('/projects');
+          return;
         }
-      ],
-      learnings: [
-        'Advanced GSAP techniques for timeline management',
-        'Performance optimization strategies for animation-heavy sites',
-        'Professional client communication and project management',
-        'Modern design principles for agency websites'
-      ],
-      duration: '6 weeks',
-      role: 'Full-stack Developer & Designer',
-      client: 'RelixCore Agency'
-    },
-    'remeda': {
-      id: 'remeda',
-      title: 'Remeda Studio Portfolio',
-      subtitle: 'Creative photography portfolio website',
-      description: 'Remeda Studio is a creative photography portfolio that showcases stunning visual art and photography work. The website focuses on presenting high-quality images in an elegant, minimalist layout that lets the artwork speak for itself.',
-      image: remedaImage,
-      gallery: [remedaImage, remedaImage, remedaImage, remedaImage],
-      techStack: ['React', 'Framer Motion', 'Tailwind CSS', 'Vercel', 'Lightbox2', 'Swiper.js'],
-      githubUrl: 'https://github.com/username/remeda',
-      liveUrl: 'https://remeda.studio',
-      features: [
-        'Elegant image gallery with lightbox functionality',
-        'Smooth page transitions and micro-interactions',
-        'Category-based portfolio filtering',
-        'Contact form with social media integration',
-        'Image optimization and lazy loading',
-        'Mobile-first responsive design'
-      ],
-      challenges: [
-        {
-          title: 'Image Loading Performance',
-          description: 'Optimizing large high-resolution images for web while maintaining quality, implementing progressive loading techniques.'
-        },
-        {
-          title: 'Gallery User Experience',
-          description: 'Creating an intuitive gallery navigation system that works well on both desktop and mobile devices.'
-        }
-      ],
-      learnings: [
-        'Image optimization techniques for web',
-        'Creating elegant user interfaces for creative portfolios',
-        'Working with photographers and creative professionals',
-        'Implementing advanced CSS Grid layouts'
-      ],
-      duration: '4 weeks',
-      role: 'Frontend Developer',
-      client: 'Remeda Studio'
-    },
-    'attendance': {
-      id: 'attendance',
-      title: 'Attendance Monitoring System',
-      subtitle: 'Real-time employee tracking platform',
-      description: 'A comprehensive attendance monitoring system designed for modern workplaces. The platform provides real-time tracking, analytics, and reporting features to help organizations manage their workforce efficiently.',
-      image: attendanceImage,
-      gallery: [attendanceImage, attendanceImage, attendanceImage],
-      techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Socket.io', 'Chart.js'],
-      githubUrl: 'https://github.com/username/attendance',
-      liveUrl: 'https://attendance-system.com',
-      features: [
-        'Real-time attendance tracking with clock-in/out',
-        'Advanced analytics and reporting dashboard',
-        'Employee management and role-based access',
-        'Automated notifications and alerts',
-        'Export functionality for reports',
-        'Mobile-responsive interface'
-      ],
-      challenges: [
-        {
-          title: 'Real-time Data Synchronization',
-          description: 'Implementing Socket.io for real-time updates across multiple user sessions while maintaining data consistency.'
-        },
-        {
-          title: 'Complex Data Relationships',
-          description: 'Designing a database schema that efficiently handles employee hierarchies, departments, and time tracking data.'
-        }
-      ],
-      learnings: [
-        'Real-time web application development',
-        'Complex database design and optimization',
-        'Enterprise software user experience design',
-        'Data visualization and analytics implementation'
-      ],
-      duration: '8 weeks',
-      role: 'Full-stack Developer',
-      client: 'Corporate Client'
-    },
-    // 'ecommerce': {
-    //   id: 'ecommerce',
-    //   title: 'E-Commerce Platform',
-    //   subtitle: 'Modern online shopping experience',
-    //   description: 'A full-featured e-commerce platform built with modern technologies. Features include product management, shopping cart, payment processing, and order management system.',
-    //   image: ecommerceImage,
-    //   gallery: [ecommerceImage, ecommerceImage, ecommerceImage, ecommerceImage],
-    //   techStack: ['React', 'Stripe', 'Supabase', 'Tailwind CSS', 'React Query', 'Zustand'],
-    //   githubUrl: 'https://github.com/username/ecommerce',
-    //   liveUrl: 'https://shop-demo.com',
-    //   features: [
-    //     'Product catalog with search and filtering',
-    //     'Shopping cart and wishlist functionality',
-    //     'Secure payment processing with Stripe',
-    //     'User authentication and profiles',
-    //     'Order tracking and history',
-    //     'Admin dashboard for inventory management'
-    //   ],
-    //   challenges: [
-    //     {
-    //       title: 'Payment Security',
-    //       description: 'Implementing secure payment processing while ensuring a smooth user experience and PCI compliance.'
-    //     },
-    //     {
-    //       title: 'State Management',
-    //       description: 'Managing complex application state across cart, user session, and product data efficiently.'
-    //     }
-    //   ],
-    //   learnings: [
-    //     'E-commerce best practices and user flows',
-    //     'Payment gateway integration and security',
-    //     'Advanced state management patterns',
-    //     'Database design for e-commerce applications'
-    //   ],
-    //   duration: '10 weeks',
-    //   role: 'Full-stack Developer',
-    //   client: 'Personal Project'
-    // },
-    // 'taskmanager': {
-    //   id: 'taskmanager',
-    //   title: 'Project Task Manager',
-    //   subtitle: 'Collaborative productivity platform',
-    //   description: 'A comprehensive task management application designed for teams and individuals. Features kanban boards, project timelines, and real-time collaboration tools.',
-    //   image: taskmanagerImage,
-    //   gallery: [taskmanagerImage, taskmanagerImage, taskmanagerImage],
-    //   techStack: ['React', 'Firebase', 'Material-UI', 'Redux', 'React DnD', 'Chart.js'],
-    //   githubUrl: 'https://github.com/username/taskmanager',
-    //   liveUrl: 'https://taskmanager.app',
-    //   features: [
-    //     'Drag-and-drop kanban boards',
-    //     'Project timeline and Gantt charts',
-    //     'Real-time collaboration and comments',
-    //     'Team member management and permissions',
-    //     'Task dependencies and priorities',
-    //     'Progress tracking and analytics'
-    //   ],
-    //   challenges: [
-    //     {
-    //       title: 'Real-time Collaboration',
-    //       description: 'Implementing real-time updates across multiple users while handling conflicts and maintaining data integrity.'
-    //     },
-    //     {
-    //       title: 'Complex UI Interactions',
-    //       description: 'Creating intuitive drag-and-drop interfaces that work seamlessly across different devices and screen sizes.'
-    //     }
-    //   ],
-    //   learnings: [
-    //     'Real-time collaborative application architecture',
-    //     'Advanced React patterns and optimization',
-    //     'User experience design for productivity tools',
-    //     'Firebase real-time database implementation'
-    //   ],
-    //   duration: '7 weeks',
-    //   role: 'Frontend Developer',
-    //   client: 'Startup Client'
-    // },
-    // 'restaurant': {
-    //   id: 'restaurant',
-    //   title: 'Restaurant Booking System',
-    //   subtitle: 'Table reservation and management platform',
-    //   description: 'A comprehensive restaurant management system that handles table reservations, menu management, and customer reviews. Built for restaurant owners to streamline their operations.',
-    //   image: restaurantImage,
-    //   gallery: [restaurantImage, restaurantImage, restaurantImage, restaurantImage],
-    //   techStack: ['React', 'Node.js', 'PostgreSQL', 'Socket.io', 'Stripe', 'AWS S3'],
-    //   githubUrl: 'https://github.com/username/restaurant',
-    //   liveUrl: 'https://restaurant-booking.com',
-    //   features: [
-    //     'Real-time table reservation system',
-    //     'Menu management with image uploads',
-    //     'Customer review and rating system',
-    //     'Payment processing for deposits',
-    //     'Staff management and shift scheduling',
-    //     'Analytics dashboard for restaurant insights'
-    //   ],
-    //   challenges: [
-    //     {
-    //       title: 'Table Availability Logic',
-    //       description: 'Implementing complex logic for table availability that accounts for reservation duration, table sizes, and restaurant capacity.'
-    //     },
-    //     {
-    //       title: 'Multi-role User Management',
-    //       description: 'Creating a system that handles different user roles (customers, staff, managers) with appropriate permissions and interfaces.'
-    //     }
-    //   ],
-    //   learnings: [
-    //     'Complex business logic implementation',
-    //     'Multi-tenant application architecture',
-    //     'Restaurant industry workflow understanding',
-    //     'Advanced PostgreSQL queries and optimization'
-    //   ],
-    //   duration: '9 weeks',
-    //   role: 'Full-stack Developer',
-    //   client: 'Restaurant Chain'
-    // }
-  };
 
-  const project = projectsData[id];
+        // Process the data to ensure proper structure
+        const processedProject = {
+          ...data,
+          // Ensure gallery is an array
+          gallery: data.gallery || [data.image].filter(Boolean),
+          // Ensure features is an array
+          features: Array.isArray(data.features) ? data.features : [],
+          // Ensure techStack is an array
+          techStack: Array.isArray(data.techStack) ? data.techStack : [],
+          // Process challenges - handle if it's a string instead of array
+          challenges: Array.isArray(data.challenges) 
+            ? data.challenges 
+            : data.challenges 
+              ? [{ title: "Project Challenges", description: data.challenges }]
+              : [],
+          // Process learnings - handle if it's a string instead of array
+          learnings: Array.isArray(data.learnings) 
+            ? data.learnings 
+            : data.learnings 
+              ? data.learnings.split('\n').filter(item => item.trim())
+              : []
+        };
+
+        setProject(processedProject);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+        navigate('/projects');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchProject();
+    }
+  }, [id, navigate]);
 
   useEffect(() => {
-    if (!project) {
-      navigate('/projects');
-      return;
-    }
+    if (!project || loading) return;
 
     // Hero section animation
     gsap.fromTo(heroRef.current,
@@ -283,10 +121,30 @@ const ProjectDetail = () => {
     );
 
     return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  }, [project, navigate]);
+  }, [project, loading]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center pt-20">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-portfolio-primary"></div>
+          <p className="mt-4 text-portfolio-text-muted">Loading project...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!project) {
-    return null;
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center pt-20">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-portfolio-text mb-4">Project not found</h1>
+          <Link to="/projects" className="portfolio-button">
+            Back to Projects
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const nextImage = () => {
@@ -303,9 +161,9 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-20">
+    <div className="min-h-screen bg-black relative z-50 pt-20">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative pt-16 pb-12">
+      <section ref={heroRef} className="relative pt-16 pb-12 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             to="/projects"
@@ -321,33 +179,39 @@ const ProjectDetail = () => {
                 <h1 className="text-4xl md:text-5xl font-bold text-portfolio-text mb-4">
                   {project.title}
                 </h1>
-                <p className="text-xl text-portfolio-primary font-medium mb-4">
-                  {project.subtitle}
-                </p>
+                {project.subtitle && (
+                  <p className="text-xl text-portfolio-primary font-medium mb-4">
+                    {project.subtitle}
+                  </p>
+                )}
                 <p className="text-portfolio-text-muted leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-4 mb-8">
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="portfolio-button inline-flex items-center gap-2"
-                >
-                  <ExternalLink size={18} />
-                  Live Demo
-                </a>
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-portfolio-surface border border-portfolio-border rounded-lg font-medium text-portfolio-text hover:bg-portfolio-surface-hover transition-colors inline-flex items-center gap-2"
-                >
-                  <Github size={18} />
-                  Source Code
-                </a>
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="portfolio-button inline-flex items-center gap-2"
+                  >
+                    <ExternalLink size={18} />
+                    Live Demo
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-portfolio-surface border border-portfolio-border rounded-lg font-medium text-portfolio-text hover:bg-portfolio-surface-hover transition-colors inline-flex items-center gap-2"
+                  >
+                    <Github size={18} />
+                    Source Code
+                  </a>
+                )}
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-sm">
@@ -367,11 +231,13 @@ const ProjectDetail = () => {
             </div>
 
             <div className="relative">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-auto shadow-2xl border-2 border-[#dcd9a0] p-2 rounded-xl"
-              />
+              {project.image && (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-auto shadow-2xl border-2 border-[#dcd9a0] p-2 rounded-xl"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -381,85 +247,96 @@ const ProjectDetail = () => {
       <main ref={contentRef} className="pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {/* Tech Stack */}
-          <section>
-            <h2 className="text-3xl font-bold text-portfolio-text mb-8">Tech Stack</h2>
-            <div className="flex flex-wrap gap-3">
-              {project.techStack.map((tech) => (
-                <span key={tech} className="tech-badge text-base px-4 py-2 bg-red-500/10 rounded-lg">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </section>
+          {project.techStack && project.techStack.length > 0 && (
+            <section>
+              <h2 className="text-3xl font-bold text-portfolio-text mb-8">Tech Stack</h2>
+              <div className="flex flex-wrap gap-3">
+                {project.techStack.map((tech, index) => (
+                  <span key={index} className="tech-badge text-base px-4 py-2 bg-red-500/10 rounded-lg">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Key Features */}
-          <section className='max-w-full'>
-            <h2 className="text-3xl font-bold text-portfolio-text mb-8">Key Features</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {project.features.map((feature, index) => (
-                <div key={index} className="portfolio-card min-w-full p-6 bg-white/10 rounded-md">
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 bg-portfolio-primary rounded-full flex-shrink-0 mt-1 flex items-center justify-center">
-                      <div className="w-2 h-2 bg-portfolio-primary-foreground rounded-full"></div>
+          {project.features && project.features.length > 0 && (
+            <section className='max-w-full'>
+              <h2 className="text-3xl font-bold text-portfolio-text mb-8">Key Features</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                {project.features.map((feature, index) => (
+                  <div key={index} className="portfolio-card min-w-full p-6 bg-white/10 rounded-md">
+                    <div className="flex items-start gap-4">
+                      <div className="w-6 h-6 bg-portfolio-primary rounded-full flex-shrink-0 mt-1 flex items-center justify-center">
+                        <div className="w-2 h-2 bg-portfolio-primary-foreground rounded-full"></div>
+                      </div>
+                      <p className="text-portfolio-text">{feature}</p>
                     </div>
-                    <p className="text-portfolio-text">{feature}</p>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Screenshots Gallery */}
-          <section className='max-w-full'>
-            <h2 className="text-3xl font-bold text-portfolio-text mb-8">Screenshots Gallery</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {project.gallery.map((image, index) => (
-                <div
-                  key={index}
-                  className="portfolio-card overflow-hidden cursor-pointer group border rounded-md border-[#dcd9a0] p-2"
-                  onClick={() => openLightbox(index)}
-                >
-                  <img
-                    src={image}
-                    alt={`${project.title} screenshot ${index + 1}`}
-                    className="w-full h-48 object-cover transition-transform  duration-300 group-hover:scale-110"
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
+          {project.gallery && project.gallery.length > 0 && (
+            <section className='max-w-full'>
+              <h2 className="text-3xl font-bold text-portfolio-text mb-8">Screenshots Gallery</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {project.gallery.map((image, index) => (
+                  <div
+                    key={index}
+                    className="portfolio-card overflow-hidden cursor-pointer group border rounded-md border-[#dcd9a0] p-2"
+                    onClick={() => openLightbox(index)}
+                  >
+                    <img
+                      src={image}
+                      alt={`${project.title} screenshot ${index + 1}`}
+                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Challenges & Solutions */}
-          <section className='max-w-full'>
-            <h2 className="text-3xl font-bold text-portfolio-text mb-8">Challenges & Solutions</h2>
-            <div className="space-y-8">
-              {project.challenges.map((challenge, index) => (
-                <div key={index} className="portfolio-card p-8">
-                  <h3 className="text-xl font-bold text-portfolio-text mb-4">
-                    {challenge.title}
-                  </h3>
-                  <p className="text-portfolio-text-muted leading-relaxed">
-                    {challenge.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
+          {project.challenges && project.challenges.length > 0 && (
+            <section className='max-w-full relative overflow-hidden p-3 rounded-3xl'>
+              <div className='h-[500px] w-[500px] rounded-full -z-10 -top-52 bg-[#d9321f] absolute -left-32'></div>
+              <h2 className="text-3xl font-bold text-portfolio-text mb-8">Challenges & Solutions</h2>
+              <div className="space-y-8">
+                {project.challenges.map((challenge, index) => (
+                  <div key={index} className="portfolio-card p-8">
+                    <h3 className="text-xl font-bold text-portfolio-text mb-4">
+                      {challenge.title || `Challenge ${index + 1}`}
+                    </h3>
+                    <p className="text-portfolio-text-muted leading-relaxed">
+                      {challenge.description || challenge}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Learnings */}
-          <section className='max-w-full'>
-            <h2 className="text-3xl font-bold text-portfolio-text mb-8">What I Learned</h2>
-            <div className="portfolio-card p-8">
-              <ul className="space-y-4">
-                {project.learnings.map((learning, index) => (
-                  <li key={index} className="flex items-start gap-4">
-                    <div className="w-2 h-2 bg-portfolio-primary rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-portfolio-text">{learning}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
+          {project.learnings && project.learnings.length > 0 && (
+            <section className='max-w-full'>
+              <h2 className="text-3xl font-bold text-portfolio-text mb-8">What I Learned</h2>
+              <div className="portfolio-card p-8">
+                <ul className="space-y-4">
+                  {project.learnings.map((learning, index) => (
+                    <li key={index} className="flex items-start gap-4">
+                      <div className="w-2 h-2 bg-portfolio-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-portfolio-text">{learning}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )}
 
           {/* Call to Action */}
           <section className="text-center max-w-full bg-white/10 rounded-xl">
@@ -472,76 +349,73 @@ const ProjectDetail = () => {
                 Let's discuss your next project.
               </p>
               <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
-                
                 <Link
                   to="/projects"
                   className="portfolio-button"
-            >
+                >
                   View More Projects
-              </Link>
-                
-              <a
-                href="mailto:contact@dcodehood.com"
-                className="px-6 py-3 bg-portfolio-surface border border-portfolio-border rounded-lg font-medium text-portfolio-text hover:bg-portfolio-surface-hover transition-colors"
-              >
-                Get In Touch
-              </a>
+                </Link>
+                <a
+                  href="mailto:contact@dcodehood.com"
+                  className="px-6 py-3 bg-portfolio-surface border border-portfolio-border rounded-lg font-medium text-portfolio-text hover:bg-portfolio-surface-hover transition-colors"
+                >
+                  Get In Touch
+                </a>
+              </div>
             </div>
+          </section>
         </div>
-      </section>
-    </div>
-      </main >
+      </main>
 
-  {/* Lightbox */ }
-{
-  isLightboxOpen && (
-    <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-      <div className="relative max-w-4xl w-full">
-        <button
-          onClick={() => setIsLightboxOpen(false)}
-          className="absolute top-4 right-4 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors z-10"
-        >
-          <X size={24} />
-        </button>
-
-        <img
-          src={project.gallery[currentImageIndex]}
-          alt={`${project.title} screenshot`}
-          className="w-full h-auto rounded-lg"
-        />
-
-        {project.gallery.length > 1 && (
-          <>
+      {/* Lightbox */}
+      {isLightboxOpen && project.gallery && project.gallery.length > 0 && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+          <div className="relative max-w-4xl w-full">
             <button
-              onClick={prevImage}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute top-4 right-4 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors z-10"
             >
-              <ChevronLeft size={24} />
+              <X size={24} />
             </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </>
-        )}
 
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          {project.gallery.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentImageIndex(index)}
-              className={`w-2 h-2 rounded-full transition-colors ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                }`}
+            <img
+              src={project.gallery[currentImageIndex]}
+              alt={`${project.title} screenshot`}
+              className="w-full h-auto rounded-lg"
             />
-          ))}
+
+            {project.gallery.length > 1 && (
+              <>
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              </>
+            )}
+
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {project.gallery.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
-  )
-}
-    </div >
   );
 };
 

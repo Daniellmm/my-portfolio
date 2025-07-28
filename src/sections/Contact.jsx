@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import TitleHeader from '../components/TitleHeader'
 import emailjs from '@emailjs/browser';
 
+
 const Contact = () => {
     const formRef = useRef(null);
 
@@ -49,15 +50,18 @@ const Contact = () => {
 
     return (
         <section id='contact' className='flex-center srction-padding'>
-            <div className='w-full h-full md:px-10 px-1 flex-center section-padding'>
+            <div className='w-full h-full md:px-10 px-1 flex-center section-padding relative overflow-hidden py-10'>
                 <div className='w-full h-full md:px-10 px-1'>
                     <TitleHeader
                         title='Get In Touch'
                         sub='Contact Me'
                     />
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-10">
+                        <div className='absolute inset-0 opacity-10'>
+                            <div className='absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500'></div>
+                        </div>
                         {/* Left: Contact Form */}
-                        <form onSubmit={handleSubmit} ref={formRef} className="md:col-span-7 col-span-12 flex flex-col gap-6 bg-tertiary p-8 rounded-2xl shadow-lg">
+                        <form onSubmit={handleSubmit} ref={formRef} className="md:col-span-7 relative col-span-12 flex flex-col gap-6 bg-tertiary p-8 rounded-2xl shadow-lg">
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="name" className="text-white font-semibold">Name</label>
                                 <input
@@ -112,7 +116,7 @@ const Contact = () => {
                             </button>
                         </form>
                         {/* Right: Image */}
-                        <div className="md:col-span-5 col-span-12 flex items-center justify-center">
+                        <div className="md:col-span-5 col-span-12 flex items-center justify-center relative">
                             <img
                                 src="/images/contact.png"
                                 alt="Contact"

@@ -170,18 +170,18 @@ const expCards = [
       // "Contributed to open-source projects that were used with the Docker ecosystem.",
     ],
   },
-  // {
-  //   review: "Daniel work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
-  //   imgPath: "/images/exp3.png",
-  //   logoPath: "/images/logo3.png",
-  //   title: "React Native Developer",
-  //   date: "March 2019 - May 2020",
-  //   responsibilities: [
-  //     "Built cross-platform mobile apps using React Native, integrating with Appwrite's backend services.",
-  //     "Improved app performance and user experience through code optimization and testing.",
-  //     "Coordinated with the product team to implement features based on feedback.",
-  //   ],
-  // },
+  {
+    review: "Daniel work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
+    imgPath: "/images/exp3.png",
+    logoPath: "/images/logo3.png",
+    title: "Mobile App Developer (Flutter & Dart)",
+    date: "March 2019 - May 2020",
+    responsibilities: [
+      "Built cross-platform mobile apps using Flutter, integrating with Appwrite's backend services.",
+      "Improved app performance and user experience through code optimization and testing.",
+      "Coordinated with the product team to implement features based on feedback.",
+    ],
+  },
 ];
 
 const expLogos = [
@@ -201,17 +201,18 @@ const expLogos = [
 
 
 const skillImages = [
-  {imgPath: "/images/logos/react.png"},
-  {imgPath: "/images/logos/node.png"},
-  {imgPath: "/images/logos/html.png"},
-  {imgPath: "/images/logos/css.png"},
-  {imgPath: "/images/logos/js.png"},
-  {imgPath: "/images/logos/nextjs.png"},
-  {imgPath: "/images/logos/git.png"},
-  {imgPath: "/images/logos/api.png"},
-  {imgPath: "/images/logos/three.png"},
-  {imgPath: "/images/logos/express.png"},
-
+  {imgPath: "/images/logos/nextjs.png", name: "Next.js", color: "from-black to-gray-800"},
+  {imgPath: "/images/logos/react.png", name: "React", color: "from-blue-400 to-blue-600"},
+  {imgPath: "/images/logos/node.png", name: "Node.js", color: "from-green-400 to-green-600"},
+  {imgPath: "/images/logos/flutter.png", name: "Flutter", color: "from-blue-300 to-blue-500"},
+  {imgPath: "/images/logos/dart.png", name: "Dart", color: "from-blue-600 to-indigo-600"},
+  {imgPath: "/images/logos/js.png", name: "JavaScript", color: "from-yellow-400 to-yellow-600"},
+  {imgPath: "/images/logos/html.png", name: "HTML5", color: "from-orange-400 to-red-500"},
+  {imgPath: "/images/logos/css.png", name: "CSS3", color: "from-blue-400 to-blue-600"},
+  {imgPath: "/images/logos/git.png", name: "Git", color: "from-orange-500 to-red-600"},
+  {imgPath: "/images/logos/api.png", name: "REST API", color: "from-purple-400 to-purple-600"},
+  {imgPath: "/images/logos/three.png", name: "Three.js", color: "from-gray-600 to-gray-800"},
+  {imgPath: "/images/logos/express.png", name: "Express.js", color: "from-gray-700 to-black"},
 ]
 
 const testimonials = [

@@ -56,7 +56,7 @@ const ExperenceSection = () => {
     }, [])
 
     return (
-        <section id='experience' className='w-full md:mt-40 mt-20 section-padding xl:px-0'>
+        <section id='experience' className='w-full md:mt-40 mt-20 section-padding xl:px-0 pb-24'>
             <div className='w-full h-full md:px-20'>
                 <TitleHeader
                     title="Work Experience"
