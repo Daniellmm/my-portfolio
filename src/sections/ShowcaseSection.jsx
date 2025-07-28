@@ -71,7 +71,7 @@ const ShowcaseSection = () => {
                     {/* right side */}
                     <div className='project-list-wrapper overflow-hidden'>
                         <div className='project' ref={projectRef2}>
-                            <div className='image-wrapper px-1 lg:py-3 bg-gradient-to-br from-blue-500 to-red-500 '>
+                            <div className='image-wrapper px-1 lg:py-3 bg-gradient-to-br from-blue-500 to-red-500'>
                                 <img src="/images/remeda1.png" className=' rounded-2xl' alt="" />
                             </div>
                             <h2 className='text-black'>Remeda Studio Portifolio Creative</h2>

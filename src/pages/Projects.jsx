@@ -102,159 +102,162 @@ const Projects = () => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-black pt-20">
-      {/* Header */}
-      <header ref={headerRef} className="pt-16 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-portfolio-text-muted hover:text-portfolio-primary transition-colors mb-8"
-          >
-            <ArrowLeft size={20} />
-            Back to Home
-          </Link>
+    <div ref={containerRef} className="min-h-screen bg-black pt-20 relative">
+      <div class="relative h-full w-full bg-black"><div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div><div class="absolute left-0 right-0 top-[-10%] h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div>
 
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="hero-gradient">Selected Work</span>
-            </h1>
-            <p className="text-xl text-portfolio-text-muted max-w-2xl mx-auto">
-              A showcase of my latest projects, from client work to personal experiments.
-              Each project represents a unique challenge and creative solution.
-            </p>
-          </div>
-
-          {/* Controls */}
-          <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-            {/* Search */}
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-portfolio-text-muted" size={20} />
-              <input
-                type="text"
-                placeholder="Search projects or technologies..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-portfolio-surface border border-portfolio-border rounded-lg text-portfolio-text placeholder-portfolio-text-muted focus:outline-none focus:border-portfolio-primary transition-colors"
-              />
-            </div>
-
-            {/* Filters */}
-            <div className="flex items-center gap-2 overflow-x-auto">
-              <Filter size={20} className="text-portfolio-text-muted mr-2" />
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedFilter(category)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedFilter === category
-                    ? 'bg-portfolio-primary text-portfolio-primary-foreground'
-                    : 'bg-portfolio-surface text-portfolio-text-muted hover:bg-portfolio-surface-hover'
-                    }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Projects Grid */}
-      {loading ? (
-        <div className="h-screen flex justify-center items-center">
-          <div className="w-12 h-12 border-4 border-t-portfolio-primary border-portfolio-surface rounded-full animate-spin" />
-        </div>
-      ) : (
-        <main className="pb-16">
+        {/* Header */}
+        <header ref={headerRef} className="pt-16 pb-12 relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {filteredProjects.length === 0 ? (
-              <div className="text-center py-16">
-                <p className="text-xl text-portfolio-text-muted">No projects found matching your criteria.</p>
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-portfolio-text-muted hover:text-portfolio-primary transition-colors mb-8"
+            >
+              <ArrowLeft size={20} />
+              Back to Home
+            </Link>
+
+            <div className="text-center mb-12">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+                <span className="hero-gradient">Selected Work</span>
+              </h1>
+              <p className="text-xl text-portfolio-text-muted max-w-2xl mx-auto">
+                A showcase of my latest projects, from client work to personal experiments.
+                Each project represents a unique challenge and creative solution.
+              </p>
+            </div>
+
+            {/* Controls */}
+            <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
+              {/* Search */}
+              <div className="relative w-full md:w-96">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-portfolio-text-muted" size={20} />
+                <input
+                  type="text"
+                  placeholder="Search projects or technologies..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-portfolio-surface border border-portfolio-border rounded-lg text-portfolio-text placeholder-portfolio-text-muted focus:outline-none focus:border-portfolio-primary transition-colors"
+                />
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                {filteredProjects.map((project) => (
 
-                  <div
-                    key={project.id}
-                    ref={addToRefs}
-                    className="portfolio-card group  border-2 border-[#dcd9a0] p-2 rounded-xl"
+              {/* Filters */}
+              <div className="flex items-center gap-2 overflow-x-auto">
+                <Filter size={20} className="text-portfolio-text-muted mr-2" />
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedFilter(category)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedFilter === category
+                      ? 'bg-portfolio-primary text-portfolio-primary-foreground'
+                      : 'bg-portfolio-surface text-portfolio-text-muted hover:bg-portfolio-surface-hover'
+                      }`}
                   >
-                    {/* Project Image */}
-                    <div className="relative overflow-hidden aspect-video ">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                      {/* Action buttons */}
-                      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 bg-background/90 backdrop-blur-sm rounded-lg text-foreground hover:bg-portfolio-primary hover:text-portfolio-primary-foreground transition-colors"
-                        >
-                          <Github size={16} />
-                        </a>
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 bg-background/90 backdrop-blur-sm rounded-lg text-foreground hover:bg-portfolio-primary hover:text-portfolio-primary-foreground transition-colors"
-                        >
-                          <ExternalLink size={16} />
-                        </a>
-                      </div>
-
-                      {project.featured && (
-                        <div className="absolute top-4 left-4">
-                          <span className="px-2 py-1 bg-portfolio-primary text-portfolio-primary-foreground text-xs font-medium rounded-full">
-                            Featured
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Project Info */}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-portfolio-text mb-2 group-hover:text-portfolio-primary transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-portfolio-text-muted mb-4 line-clamp-2">
-                        {project.summary}
-                      </p>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {Array.isArray(project.tags) && project.tags.length > 0 ? (
-                          project.tags.map((tag) => (
-                            <span key={tag} className="tech-badge">{tag}</span>
-                          ))
-                        ) : (
-                          <span className="text-xs text-gray-400 italic">No tags</span>
-                        )}
-
-                      </div>
-
-                      {/* View Project Link */}
-                      <Link
-                        to={`/projects/${project.id}`}
-                        className="inline-flex items-center gap-2 text-red-600 text-portfolio-primary hover:text-portfolio-primary-dark font-medium transition-colors"
-                        onClick={() => console.log("Navigating to:", `/projects/${project.id}`)}  // Debug log
-                      >
-                        View Project
-                        <ExternalLink size={16} />
-                      </Link>
-                    </div>
-                  </div>
+                    {category}
+                  </button>
                 ))}
               </div>
-            )}
+            </div>
           </div>
-        </main >
-      )}
+        </header>
+
+        {/* Projects Grid */}
+        {loading ? (
+          <div className="h-screen flex justify-center items-center relative z-10">
+            <div className="w-12 h-12 border-4 border-t-portfolio-primary border-portfolio-surface rounded-full animate-spin" />
+          </div>
+        ) : (
+          <main className="pb-16 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              {filteredProjects.length === 0 ? (
+                <div className="text-center py-16">
+                  <p className="text-xl text-portfolio-text-muted">No projects found matching your criteria.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                  {filteredProjects.map((project) => (
+
+                    <div
+                      key={project.id}
+                      ref={addToRefs}
+                      className="portfolio-card group  border-2 border-[#dcd9a0] p-2 rounded-xl"
+                    >
+                      {/* Project Image */}
+                      <div className="relative overflow-hidden aspect-video ">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                        {/* Action buttons */}
+                        <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-background/90 backdrop-blur-sm rounded-lg text-foreground hover:bg-portfolio-primary hover:text-portfolio-primary-foreground transition-colors"
+                          >
+                            <Github size={16} />
+                          </a>
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-background/90 backdrop-blur-sm rounded-lg text-foreground hover:bg-portfolio-primary hover:text-portfolio-primary-foreground transition-colors"
+                          >
+                            <ExternalLink size={16} />
+                          </a>
+                        </div>
+
+                        {project.featured && (
+                          <div className="absolute top-4 left-4">
+                            <span className="px-2 py-1 bg-portfolio-primary text-portfolio-primary-foreground text-xs font-medium rounded-full">
+                              Featured
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Project Info */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-portfolio-text mb-2 group-hover:text-portfolio-primary transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-portfolio-text-muted mb-4 line-clamp-2">
+                          {project.summary}
+                        </p>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {Array.isArray(project.tags) && project.tags.length > 0 ? (
+                            project.tags.map((tag) => (
+                              <span key={tag} className="tech-badge">{tag}</span>
+                            ))
+                          ) : (
+                            <span className="text-xs text-gray-400 italic">No tags</span>
+                          )}
+
+                        </div>
+
+                        {/* View Project Link */}
+                        <Link
+                          to={`/projects/${project.id}`}
+                          className="inline-flex items-center gap-2 text-red-600 text-portfolio-primary hover:text-portfolio-primary-dark font-medium transition-colors"
+                          onClick={() => console.log("Navigating to:", `/projects/${project.id}`)}  // Debug log
+                        >
+                          View Project
+                          <ExternalLink size={16} />
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </main >
+        )}
+      </div>
     </div >
   );
 };
