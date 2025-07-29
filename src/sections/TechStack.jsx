@@ -195,7 +195,7 @@ const TechStack = () => {
             ))}
           </div>
 
-          <div className='lg:w-4/6'>
+          <div className='lg:w-4/6 px-5'>
             <div>
               <ul className='flex flex-col gap-5'>
                 <li className='list-disc text-lg text-black-50'>
@@ -205,6 +205,10 @@ const TechStack = () => {
                 <li className='list-disc text-lg text-black-50'>
                   <span className='text-black font-bold'>Back-End: </span>
                   Node.Js, ExpressJs.
+                </li>
+                <li className='list-disc text-lg text-black-50'>
+                  <span className='text-black font-bold'>Mobile App: </span>
+                  Flutter, Dart
                 </li>
                 <li className='list-disc text-lg text-black-50'>
                   <span className='text-black font-bold'>Databases: </span>

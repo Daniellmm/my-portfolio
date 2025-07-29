@@ -113,7 +113,8 @@ const Projects = () => {
               className="inline-flex items-center gap-2 text-portfolio-text-muted hover:text-portfolio-primary transition-colors mb-8"
             >
               <ArrowLeft size={20} />
-              Back to Home
+              <span className="hidden sm:inline"> Back to Home</span>
+
             </Link>
 
             <div className="text-center mb-12">

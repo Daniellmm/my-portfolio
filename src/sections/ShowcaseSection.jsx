@@ -52,7 +52,7 @@ const ShowcaseSection = () => {
                 <div className='showcaselayout  relative z-10'>
                     {/* left side */}
                     <div className='first-project-wrapper' ref={projectRef1}>
-                        <div className='imnage-wrapper p-5 rounded-xl bg-gradient-to-br from-blue-500 to-red-500  '>
+                        <div className='imnage-wrapper p-5 rounded-xl bg-gradient-to-r from-red-600/20 to-purple-600/20'>
                             <img src="/images/relixcore.png" className='rounded-xl' alt="Remeda" />
                         </div>
                         <div className='text-content text-black'>
@@ -71,13 +71,13 @@ const ShowcaseSection = () => {
                     {/* right side */}
                     <div className='project-list-wrapper overflow-hidden'>
                         <div className='project' ref={projectRef2}>
-                            <div className='image-wrapper px-1 lg:py-3 bg-gradient-to-br from-blue-500 to-red-500'>
+                            <div className='image-wrapper px-1 lg:py-3 bg-gradient-to-r from-red-600/20 to-purple-600/20'>
                                 <img src="/images/remeda1.png" className=' rounded-2xl' alt="" />
                             </div>
                             <h2 className='text-black'>Remeda Studio Portifolio Creative</h2>
                         </div>
                         <div className='project' ref={projectRef3}>
-                            <div className='image-wrapper px-1 lg:py-3 bg-gradient-to-br from-blue-500 to-red-500'>
+                            <div className='image-wrapper px-1 lg:py-3 bg-gradient-to-r from-red-600/20 to-purple-600/20'>
                                 <img src="/images/admin.png" className=' rounded-2xl' alt="" />
                             </div>
                             <h2 className='text-black'>Attendance Monitoring System</h2>

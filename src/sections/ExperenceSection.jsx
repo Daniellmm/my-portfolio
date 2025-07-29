@@ -39,9 +39,9 @@ const ExperenceSection = () => {
                 }
             }
         })
-        
 
-         gsap.utils.toArray('.expText').forEach((text) => {
+
+        gsap.utils.toArray('.expText').forEach((text) => {
             gsap.from(text, {
                 xPercent: 0,
                 opacity: 0,
@@ -56,13 +56,14 @@ const ExperenceSection = () => {
     }, [])
 
     return (
-        <section id='experience' className='w-full md:mt-40 mt-20 section-padding xl:px-0 pb-24'>
+        <section id='experience' className='w-full md:mt-40 mt-20 section-padding xl:px-0 pb-24 relative'>
             <div className='w-full h-full md:px-20'>
                 <TitleHeader
                     title="Work Experience"
                     sub="My Career Overview"
                 />
 
+                <div className='h-[800px] w-[800px] rounded-full bg-gradient-to-tl from-[#010db6] absolute -bottom-72 -right-72 blur-3xl opacity-90'></div>
                 <div className='mt-32 relative'>
                     <div className='relative z-50 xl:space-y-32 space-y-10'>
                         {expCards.map((card, index) => (

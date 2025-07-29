@@ -20,17 +20,13 @@ export default {
       validation: Rule => Rule.required()
     },
     {
-      name: 'subtitle',
-      title: 'Subtitle',
-      type: 'string',
-      description: 'A brief subtitle or tagline for the project'
-    },
-    {
-      name: 'summary',
-      title: 'Summary',
-      type: 'text',
-      description: 'Brief summary for project cards (used in project listing)',
-      validation: Rule => Rule.required()
+      name: 'video',
+      title: 'Project Video',
+      type: 'file',
+      description: 'Optional video file upload (e.g., .mp4, .mov)',
+      options: {
+        accept: 'video/*'
+      }
     },
     {
       name: 'description',
@@ -82,36 +78,6 @@ export default {
       description: 'List of key features or highlights'
     },
     {
-      name: 'challenges',
-      title: 'Challenges & Solutions',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {
-              name: 'title',
-              title: 'Challenge Title',
-              type: 'string'
-            },
-            {
-              name: 'description',
-              title: 'Challenge Description',
-              type: 'text'
-            }
-          ]
-        }
-      ],
-      description: 'Challenges faced and how they were solved'
-    },
-    {
-      name: 'learnings',
-      title: 'Key Learnings',
-      type: 'array',
-      of: [{ type: 'string' }],
-      description: 'What you learned from this project'
-    },
-    {
       name: 'tags',
       title: 'Tags',
       type: 'array',
@@ -132,13 +98,6 @@ export default {
         ]
       },
       validation: Rule => Rule.required()
-    },
-    {
-      name: 'featured',
-      title: 'Featured Project',
-      type: 'boolean',
-      description: 'Mark as featured project',
-      initialValue: false
     },
     {
       name: 'duration',
