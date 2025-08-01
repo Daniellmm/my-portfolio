@@ -32,7 +32,7 @@ const ProjectDetail = () => {
             _id,
             title,
             description,
-            video,
+            "video": video.asset->url,
             "image": image.asset->url,
             "gallery": gallery[].asset->url,
             techStack,
@@ -393,51 +393,6 @@ const ProjectDetail = () => {
             </section>
           )}
 
-          {/* Challenges & Solutions */}
-          {project.challenges && project.challenges.length > 0 && (
-            <section className="relative max-w-full">
-              <div className="absolute -top-32 -left-32 w-64 h-64 bg-gradient-to-r from-red-600/30 to-purple-600/30 rounded-full blur-3xl -z-10"></div>
-              <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-gradient-to-r from-purple-600/30 to-red-600/30 rounded-full blur-3xl -z-10"></div>
-
-              <h2 className="text-4xl font-bold text-white mb-12 text-center">
-                Challenges & Solutions
-              </h2>
-              <div className="space-y-8">
-                {project.challenges.map((challenge, index) => (
-                  <div
-                    key={index}
-                    className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:bg-white/10 transition-all duration-300"
-                  >
-                    <h3 className="text-2xl font-bold text-red-400 mb-6">
-                      {challenge.title || `Challenge ${index + 1}`}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed text-lg">
-                      {challenge.description || challenge}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Learnings */}
-          {project.learnings && project.learnings.length > 0 && (
-            <section className='max-w-full'>
-              <h2 className="text-4xl font-bold text-white mb-12 text-center">
-                Key Learnings
-              </h2>
-              <div className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-gray-700/50">
-                <ul className="space-y-6">
-                  {project.learnings.map((learning, index) => (
-                    <li key={index} className="flex items-start gap-4">
-                      <div className="w-3 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-300 leading-relaxed text-lg">{learning}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          )}
 
           {/* Call to Action */}
           <section className="text-center relative max-w-full">

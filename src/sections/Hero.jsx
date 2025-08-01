@@ -25,7 +25,7 @@ const Hero = () => {
     )
   })
   return (
-    <section id='hero' className=' relative overflow-hidden'>
+    <div id='hero' className='sec relative overflow-hidden'>
       <div className=' absolute top-0 left-0 z-10'>
         <img src="/images/bg.png" alt="backgroung" />
       </div>
@@ -71,7 +71,7 @@ const Hero = () => {
 
         <div className='w-full flex justify-center items-center '>
           <div className=' h-[350px] w-[350px] rounded-[100%]'>
-            <img src="/images/dcoder.png" alt="" className='h-full w-full rounded-full' />
+            <img src="/images/client1.png" alt="" className='h-full w-full rounded-full' />
           </div>
         </div>
 
@@ -88,7 +88,7 @@ const Hero = () => {
       <div className='mt-24 md:mt-5'>
         <AnimatedCounter />
       </div>
-    </section>
+    </div>
   )
 }
 

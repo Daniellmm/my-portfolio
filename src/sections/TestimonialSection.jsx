@@ -5,7 +5,7 @@ import GlowCard from '../components/GlowCard'
 
 const TestimonialSection = () => {
   return (
-    <section id='testimonials' className='flex-center section-padding'>
+    <div id='testimonials' className='sec flex-center section-padding'>
         <div className='w-full h-full md:px-10 px-1'>
             <TitleHeader 
             title='What Clients Say About Me'
@@ -22,7 +22,7 @@ const TestimonialSection = () => {
 
             </div>
         </div>
-    </section>
+    </div>
   )
 }
 

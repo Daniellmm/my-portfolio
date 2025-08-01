@@ -40,7 +40,7 @@ const ShowcaseSection = () => {
         )
     }, [])
     return (
-        <section ref={sectionRef} id='work' className='app-showcase bg-white relative'>
+        <div ref={sectionRef} id='work' className='sec app-showcase bg-white relative'>
             <div className="absolute bottom-0 left-0 right-0 top-[0px] bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
 
             <div className='w-full'>
@@ -49,7 +49,7 @@ const ShowcaseSection = () => {
                     sub="Showcase"
                     title="My Top Projects"
                 />
-                <div className='showcaselayout  relative z-10'>
+                <div className='showcaselayout relative z-10'>
                     {/* left side */}
                     <div className='first-project-wrapper' ref={projectRef1}>
                         <div className='imnage-wrapper p-5 rounded-xl bg-gradient-to-r from-red-600/20 to-purple-600/20'>
@@ -96,7 +96,7 @@ const ShowcaseSection = () => {
 
                 </div>
             </div>
-        </section>
+        </div>
     )
 }
 
