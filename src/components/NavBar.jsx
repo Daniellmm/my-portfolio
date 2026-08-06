@@ -1,6 +1,7 @@
 import { navLinks } from '../constants'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Search } from 'lucide-react'
 import { useMagnetic } from '../hooks/useMagnetic'
 
 const NavBar = () => {
@@ -67,6 +68,17 @@ const NavBar = () => {
                         <span></span>
                         <span></span>
                     </div>
+                </button>
+
+                {/* Command Palette Trigger */}
+                <button
+                    type='button'
+                    onClick={() => window.dispatchEvent(new CustomEvent('dch:command-palette'))}
+                    className='desktop-only flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 text-blue-50 hover:text-white-50 hover:border-white/20 transition-colors duration-300'
+                    aria-label='Open command palette'
+                >
+                    <Search size={14} />
+                    <kbd className='font-mono text-[10px]'>⌘K</kbd>
                 </button>
 
                 {/* Desktop Contact Button */}

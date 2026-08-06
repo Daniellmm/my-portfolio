@@ -9,6 +9,7 @@ import Preloader from "./components/Preloader"
 import PageTransition from "./components/PageTransition"
 import CustomCursor from "./components/CustomCursor"
 import ScrollProgress from "./components/ScrollProgress"
+import CommandPalette from "./components/CommandPalette"
 import HomePage from "./pages/HomePage"
 import NotFound from "./pages/NotFound"
 
@@ -43,6 +44,7 @@ const App = () => {
     <BrowserRouter>
       <CustomCursor />
       <ScrollProgress />
+      <CommandPalette />
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       <NavBar />
       <Suspense fallback={<div className="min-h-screen bg-black-100" />}>
