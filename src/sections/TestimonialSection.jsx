@@ -15,16 +15,8 @@ const TestimonialSection = () => {
                 {
                     testimonials.map((testimonial, index) => (
                         <GlowCard card={testimonial} index={index} key={testimonial.name}>
-                            <div className='flex items-center gap-3 pt-4 mt-1 border-t border-white/5'>
-                                <img
-                                    src={testimonial.imgPath}
-                                    alt={testimonial.name}
-                                    className='size-11 rounded-full object-cover'
-                                />
-                                <div>
-                                    <p className='font-semibold text-white-50'>{testimonial.name}</p>
-                                    <p className='text-blue-50 text-sm'>{testimonial.mentions}</p>
-                                </div>
+                            <div className='pt-4 mt-1 border-t border-white/5'>
+                                <p className='font-semibold text-white-50'>{testimonial.name}</p>
                             </div>
                         </GlowCard>
                     ))

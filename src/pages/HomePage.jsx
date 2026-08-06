@@ -15,9 +15,9 @@ const HomePage = () => {
             <Hero />
             <ShowcaseSection />
             <LogoSection />
+            <TechStack />
             <FeatureCards />
             <ExperenceSection />
-            <TechStack />
             <TestimonialSection />
             <Contact />
         </>

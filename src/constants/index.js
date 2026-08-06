@@ -130,8 +130,6 @@ const skillImages = [
   {imgPath: "/images/logos/nextjs.png", name: "Next.js"},
   {imgPath: "/images/logos/react.png", name: "React"},
   {imgPath: "/images/logos/node.png", name: "Node.js"},
-  {imgPath: "/images/logos/flutter.png", name: "Flutter"},
-  {imgPath: "/images/logos/dart.png", name: "Dart"},
   {imgPath: "/images/logos/js.png", name: "JavaScript"},
   {imgPath: "/images/logos/html.png", name: "HTML5"},
   {imgPath: "/images/logos/css.png", name: "CSS3"},
@@ -144,43 +142,21 @@ const skillImages = [
 const testimonials = [
   {
     name: "Tammi",
-    mentions: "@estherhoward",
     review:
       "It was a pleasure working with you too! The website turned out beautifully Daniel. Thanks again for your patience and making this sauce launch a success. & I will definitely recommend your work to others",
     imgPath: "/images/client1.png",
   },
   {
     name: "RelixCore",
-    mentions: "@wadewarren",
     review:
       "Daniel’s work exceeded all expectations! The website is not only beautiful but also functions flawlessly. His patience and expertise made the whole process smooth and stress-free. I can’t thank him enough for making this project a success, and I’ll definitely refer his services to others.",
     imgPath: "/images/client3.png",
   },
   {
     name: "Hubert",
-    mentions: "@guyhawkins",
     review:
       "Working with Daniel was fantastic! He brought our vision to life with a stunning website. His attention to detail made all the difference. Thanks to him, our project launch was a huge success, and I’ll absolutely recommend him to others",
     imgPath: "/images/client2.png",
-  },
-];
-
-const socialImgs = [
-  {
-    name: "insta",
-    imgPath: "/images/insta.png",
-  },
-  {
-    name: "fb",
-    imgPath: "/images/fb.png",
-  },
-  {
-    name: "x",
-    imgPath: "/images/x.png",
-  },
-  {
-    name: "linkedin",
-    imgPath: "/images/linkedin.png",
   },
 ];
 
@@ -192,6 +168,5 @@ export {
   counterItems,
   expCards,
   testimonials,
-  socialImgs,
   navLinks,
 };

@@ -1,14 +1,29 @@
 import React, { useRef, useState } from 'react'
 import TitleHeader from '../components/TitleHeader'
 import emailjs from '@emailjs/browser';
+import { Mail, MapPin, Github, MessageCircle, Send } from 'lucide-react';
 
+const EMAIL = 'contact@dcodehood.com';
+
+const contactCards = [
+    { icon: Mail, label: 'Email', value: EMAIL, href: `mailto:${EMAIL}` },
+    { icon: MapPin, label: 'Location', value: 'Remote — Worldwide' },
+];
+
+const socialLinks = [
+    { icon: Github, label: 'GitHub', href: '#' },
+    { icon: Mail, label: 'Email', href: `mailto:${EMAIL}` },
+    { icon: MessageCircle, label: 'Chat', href: '#' },
+];
 
 const Contact = () => {
     const formRef = useRef(null);
 
     const [formData, setFormData] = useState({
-        name: '',
+        first_name: '',
+        last_name: '',
         email: '',
+        subject: '',
         message: ''
     })
 
@@ -17,10 +32,7 @@ const Contact = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
@@ -34,11 +46,7 @@ const Contact = () => {
                 formRef.current,
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY
             )
-            setFormData({
-                name: '',
-                email: '',
-                message: ''
-            });
+            setFormData({ first_name: '', last_name: '', email: '', subject: '', message: '' });
             setStatus('success');
         } catch (error) {
             console.error('EMAILJS ERROR: ', error);
@@ -46,92 +54,136 @@ const Contact = () => {
         } finally {
             setLoading(false);
         }
-
     }
-
 
     return (
         <div id='contact' className='sec flex-center section-padding'>
-            <div className='w-full h-full md:px-10 px-1 flex-center relative overflow-hidden'>
+            <div className='w-full h-full md:px-10 px-1 relative overflow-hidden'>
                 <div className='grid-pattern' />
 
-                <div className='w-full h-full md:px-10 px-1 relative z-10'>
+                <div className='w-full relative z-10'>
                     <TitleHeader
                         title='Get In Touch'
                         sub='Contact Me'
                     />
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-10">
-                        {/* Left: Contact Form */}
-                        <form onSubmit={handleSubmit} ref={formRef} className="md:col-span-7 relative col-span-12 flex flex-col gap-6 card-border p-8 rounded-2xl">
-                            <div className="flex flex-col gap-2">
-                                <label htmlFor="name" className="text-white-50 font-semibold">Name</label>
+
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-12 mt-14 max-w-6xl mx-auto'>
+                        {/* Left: contact info */}
+                        <div className='flex flex-col gap-6'>
+                            <h3 className='text-2xl font-semibold text-white-50'>Get in touch</h3>
+
+                            <div className='flex flex-col gap-4'>
+                                {contactCards.map(({ icon, label, value, href }) => {
+                                    const Icon = icon
+                                    const card = (
+                                        <div className='flex items-center gap-4 card-border rounded-xl p-5 hover:border-accent/50 transition-colors duration-300'>
+                                            <Icon className='text-accent shrink-0' size={22} />
+                                            <div>
+                                                <p className='font-semibold text-white-50'>{label}</p>
+                                                <p className='text-blue-50'>{value}</p>
+                                            </div>
+                                        </div>
+                                    )
+                                    return href ? (
+                                        <a key={label} href={href}>{card}</a>
+                                    ) : (
+                                        <div key={label}>{card}</div>
+                                    )
+                                })}
+                            </div>
+
+                            <div className='mt-4'>
+                                <p className='font-semibold text-white-50 mb-4'>Follow me</p>
+                                <div className='socials'>
+                                    {socialLinks.map(({ icon, label, href }) => {
+                                        const Icon = icon
+                                        return (
+                                            <a
+                                                key={label}
+                                                href={href}
+                                                target='_blank'
+                                                rel='noopener noreferrer'
+                                                aria-label={label}
+                                                className='icon'
+                                            >
+                                                <Icon size={18} />
+                                            </a>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right: message form */}
+                        <form onSubmit={handleSubmit} ref={formRef} className='flex flex-col gap-4'>
+                            <h3 className='text-2xl font-semibold text-white-50 mb-2'>Send a message</h3>
+
+                            <input type='hidden' name='name' value={`${formData.first_name} ${formData.last_name}`.trim()} />
+
+                            <div className='grid grid-cols-2 gap-4'>
                                 <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    placeholder="Your Name"
+                                    type='text'
+                                    name='first_name'
+                                    placeholder='First name'
                                     onChange={handleChange}
-                                    value={formData.name}
+                                    value={formData.first_name}
                                     required
                                 />
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <label htmlFor="email" className="text-white-50 font-semibold">Email</label>
                                 <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
+                                    type='text'
+                                    name='last_name'
+                                    placeholder='Last name'
                                     onChange={handleChange}
-                                    value={formData.email}
-                                    placeholder="your@email.com"
-                                    required
+                                    value={formData.last_name}
                                 />
                             </div>
-                            <div className="flex flex-col gap-2">
-                                <label htmlFor="message" className="text-white-50 font-semibold">Message</label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    rows="5"
-                                    onChange={handleChange}
-                                    value={formData.message}
-                                    placeholder="Type your message..."
-                                    required
-                                />
-                            </div>
+
+                            <input
+                                type='email'
+                                name='email'
+                                placeholder='Email address'
+                                onChange={handleChange}
+                                value={formData.email}
+                                required
+                            />
+
+                            <input
+                                type='text'
+                                name='subject'
+                                placeholder='Subject'
+                                onChange={handleChange}
+                                value={formData.subject}
+                            />
+
+                            <textarea
+                                name='message'
+                                rows='6'
+                                placeholder='Your message'
+                                onChange={handleChange}
+                                value={formData.message}
+                                required
+                            />
+
                             <button
                                 disabled={loading}
-                                type="submit"
-                                className='disabled:opacity-60 disabled:cursor-not-allowed'
+                                type='submit'
+                                className='mt-2 w-full py-4 bg-white-50 text-black-100 font-semibold rounded-xl flex items-center justify-center gap-2 hover:bg-white transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed'
                             >
-                                <div className='cta-button group'>
-                                    <div className='bg-circle' />
-                                    <p className='text'>{loading ? 'Sending...' : 'Send Message'}</p>
-                                    <div className='arrow-wrapper'>
-                                        <img src="/images/arrow-down.svg" alt="arrow" />
-                                    </div>
-                                </div>
+                                <Send size={18} />
+                                {loading ? 'Sending...' : 'Send message'}
                             </button>
 
                             {status === 'success' && (
-                                <p role="status" className='text-sm text-center text-accent'>
+                                <p role='status' className='text-sm text-center text-accent'>
                                     Message sent — thanks for reaching out, I&apos;ll reply soon.
                                 </p>
                             )}
                             {status === 'error' && (
-                                <p role="alert" className='text-sm text-center text-red-400'>
+                                <p role='alert' className='text-sm text-center text-red-400'>
                                     Something went wrong sending that. Please try again in a moment.
                                 </p>
                             )}
                         </form>
-                        {/* Right: Image */}
-                        <div className="md:col-span-5 col-span-12 flex items-center justify-center relative">
-                            <img
-                                src="/images/contact.png"
-                                alt="Contact"
-                                className="rounded-2xl object-cover w-full h-full card-border"
-                            />
-                        </div>
                     </div>
                 </div>
             </div>

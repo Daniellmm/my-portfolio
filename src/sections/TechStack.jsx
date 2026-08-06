@@ -179,15 +179,15 @@ const TechStack = () => {
               <ul className='flex flex-col gap-5'>
                 <li className='list-disc text-lg text-blue-50'>
                   <span className='text-white-50 font-bold'>Front-End: </span>
-                  HTML, CSS, JavaScript, React.Js, Next.Js.
+                  HTML, CSS, JavaScript, React.JS, Next.JS.
                 </li>
                 <li className='list-disc text-lg text-blue-50'>
                   <span className='text-white-50 font-bold'>Back-End: </span>
-                  Node.Js, ExpressJs.
+                 Nest.JS Node.JS, Express.JS.
                 </li>
                 <li className='list-disc text-lg text-blue-50'>
                   <span className='text-white-50 font-bold'>Mobile App: </span>
-                  Flutter, Dart
+                  React Native, Expo.
                 </li>
                 <li className='list-disc text-lg text-blue-50'>
                   <span className='text-white-50 font-bold'>Databases: </span>
