@@ -5,12 +5,11 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) — credited in
 Generated via gltfjsx, transformed/compressed to public/models/isometric-gaming-room-transformed.glb
 */
 
-import React, { useState } from 'react'
-import { useGLTF, Html } from '@react-three/drei'
+import React from 'react'
+import { useGLTF } from '@react-three/drei'
 
-export function GamingRoom({ onScreenClick, ...props }) {
+export function GamingRoom({ onScreenClick, onScreenHoverChange, ...props }) {
   const { nodes, materials } = useGLTF('/models/isometric-gaming-room-transformed.glb')
-  const [screenHovered, setScreenHovered] = useState(false)
 
   return (
     <group {...props} dispose={null}>
@@ -27,23 +26,15 @@ export function GamingRoom({ onScreenClick, ...props }) {
         }}
         onPointerOver={(e) => {
           e.stopPropagation()
-          setScreenHovered(true)
+          onScreenHoverChange?.(true)
           window.dispatchEvent(new CustomEvent('dch:cursor', { detail: { state: 'hover' } }))
         }}
         onPointerOut={(e) => {
           e.stopPropagation()
-          setScreenHovered(false)
+          onScreenHoverChange?.(false)
           window.dispatchEvent(new CustomEvent('dch:cursor', { detail: { state: 'canvas' } }))
         }}
-      >
-        {screenHovered && (
-          <Html center distanceFactor={6} position={[0, 0, 0.1]}>
-            <span className='px-3 py-1.5 rounded-full bg-black-100/90 border border-white/10 text-white-50 text-xs font-mono whitespace-nowrap pointer-events-none'>
-              View Projects →
-            </span>
-          </Html>
-        )}
-      </mesh>
+      />
     </group>
   )
 }
