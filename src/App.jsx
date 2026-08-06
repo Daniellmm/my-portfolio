@@ -1,11 +1,12 @@
 import { lazy, Suspense, useEffect, useState } from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route } from "react-router-dom"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Lenis from "lenis"
 import NavBar from "./components/NavBar"
 import Footer from "./components/Footer"
 import Preloader from "./components/Preloader"
+import PageTransition from "./components/PageTransition"
 import HomePage from "./pages/HomePage"
 
 const Projects = lazy(() => import("./pages/Projects"))
@@ -40,11 +41,11 @@ const App = () => {
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       <NavBar />
       <Suspense fallback={<div className="min-h-screen bg-black-100" />}>
-        <Routes>
+        <PageTransition>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
-        </Routes>
+        </PageTransition>
       </Suspense>
       <Footer />
     </BrowserRouter>

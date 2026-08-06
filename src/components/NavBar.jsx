@@ -1,5 +1,6 @@
 import { navLinks } from '../constants'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -33,16 +34,21 @@ const NavBar = () => {
                 {/* Desktop Navigation */}
                 <nav className='desktop'>
                     <ul>
-                        {navLinks.map(({ link, name }) => (
-                            <li key={name} className='group'>
-                                <a href={link}>
-                                    <span>
-                                        {name}
-                                    </span>
-                                    <span className='underline'></span>
-                                </a>
-                            </li>
-                        ))}
+                        {navLinks.map(({ link, name }) => {
+                            const isRoute = link.startsWith('/')
+                            const NavItem = isRoute ? Link : 'a'
+                            const navProp = isRoute ? { to: link } : { href: link }
+                            return (
+                                <li key={name} className='group'>
+                                    <NavItem {...navProp}>
+                                        <span>
+                                            {name}
+                                        </span>
+                                        <span className='underline'></span>
+                                    </NavItem>
+                                </li>
+                            )
+                        })}
                     </ul>
                 </nav>
 
@@ -72,13 +78,18 @@ const NavBar = () => {
             <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
                 <nav className='mobile-nav'>
                     <ul>
-                        {navLinks.map(({ link, name }) => (
-                            <li key={name}>
-                                <a href={link} onClick={closeMobileMenu}>
-                                    {name}
-                                </a>
-                            </li>
-                        ))}
+                        {navLinks.map(({ link, name }) => {
+                            const isRoute = link.startsWith('/')
+                            const NavItem = isRoute ? Link : 'a'
+                            const navProp = isRoute ? { to: link } : { href: link }
+                            return (
+                                <li key={name}>
+                                    <NavItem {...navProp} onClick={closeMobileMenu}>
+                                        {name}
+                                    </NavItem>
+                                </li>
+                            )
+                        })}
                         <li>
                             <a
                                 href="#contact"
