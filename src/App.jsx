@@ -8,7 +8,9 @@ import Footer from "./components/Footer"
 import Preloader from "./components/Preloader"
 import PageTransition from "./components/PageTransition"
 import CustomCursor from "./components/CustomCursor"
+import ScrollProgress from "./components/ScrollProgress"
 import HomePage from "./pages/HomePage"
+import NotFound from "./pages/NotFound"
 
 const Projects = lazy(() => import("./pages/Projects"))
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail.jsx"))
@@ -40,6 +42,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <CustomCursor />
+      <ScrollProgress />
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       <NavBar />
       <Suspense fallback={<div className="min-h-screen bg-black-100" />}>
@@ -47,6 +50,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
+          <Route path="*" element={<NotFound />} />
         </PageTransition>
       </Suspense>
       <Footer />

@@ -29,6 +29,26 @@ body {
   cursor: auto !important;
 }
 
+a,
+button,
+input,
+textarea,
+select,
+[tabindex]:not([tabindex="-1"]) {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html,
   body {
