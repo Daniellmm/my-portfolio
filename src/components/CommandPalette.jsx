@@ -80,6 +80,7 @@ const CommandPalette = () => {
         document.body.style.overflow = 'hidden'
         inputRef.current?.focus()
         setActiveIndex(0)
+        window.dispatchEvent(new CustomEvent('dch:palette-opened'))
         return () => {
             document.body.style.overflow = ''
         }

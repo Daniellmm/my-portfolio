@@ -177,37 +177,6 @@ select:focus-visible,
       }
     }
 
-    nav.desktop {
-      @apply hidden lg:flex items-center;
-
-      ul {
-        @apply flex space-x-8;
-
-        li {
-          @apply text-white-50 relative;
-
-          span {
-            @apply transition-colors duration-300 hover:text-white;
-          }
-
-          .underline {
-            @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full;
-          }
-        }
-      }
-    }
-
-    .contact-btn {
-      @apply flex;
-
-      .inner {
-        @apply px-5 py-2 rounded-lg bg-white-50 text-black-100 group-hover:bg-accent transition-colors duration-300;
-
-        span {
-          @apply group-hover:text-white transition-colors duration-300;
-        }
-      }
-    }
   }
 
   .app-showcase {
@@ -503,8 +472,8 @@ select:focus-visible,
 }
 
 /* Mobile menu button - hidden on desktop */
-.mobile-menu-btn {
-  display: none;
+.menu-trigger {
+  display: flex;
 }
 
 /* Hamburger icon styles */
@@ -535,88 +504,8 @@ select:focus-visible,
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Mobile menu styles */
-.mobile-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: rgba(8, 8, 10, 0.97);
-  backdrop-filter: blur(14px);
-  transform: translateY(-20px);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.mobile-menu.open {
-  display: block;
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.mobile-nav ul {
-  list-style: none;
-  padding: 20px;
-}
-
-.mobile-nav li {
-  margin: 8px 0;
-}
-
-.mobile-nav a {
-  color: #f3f3f1;
-  text-decoration: none;
-  font-size: 18px;
-  display: block;
-  padding: 12px;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-}
-
-.mobile-nav a:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-}
-
-.mobile-contact a {
-  background-color: #e5484d;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
-/* Hide desktop contact on mobile */
 @media (max-width: 768px) {
   .desktop-only {
-    display: none !important;
-  }
-
-  .mobile-menu-btn {
-    display: block;
-  }
-
-  .desktop {
-    display: none;
-  }
-}
-
-/* Show desktop nav on larger screens */
-@media (min-width: 769px) {
-
-  .mobile-menu-btn,
-  .mobile-menu,
-  .mobile-menu-overlay {
     display: none !important;
   }
 }

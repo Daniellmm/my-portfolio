@@ -1,14 +1,10 @@
-import { navLinks } from '../constants'
-import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
-import { useMagnetic } from '../hooks/useMagnetic'
+import FullScreenMenu from './FullScreenMenu'
 
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const contactBtnRef = useRef(null);
-    useMagnetic(contactBtnRef, { strength: 0.25, radius: 70 });
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -20,13 +16,8 @@ const NavBar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [])
 
-    const toggleMobileMenu = () => {
-        setMobileMenuOpen(!mobileMenuOpen);
-    };
-
-    const closeMobileMenu = () => {
-        setMobileMenuOpen(false);
-    };
+    const toggleMenu = () => setMenuOpen((prev) => !prev);
+    const closeMenu = () => setMenuOpen(false);
 
     return (
         <header className={`navbar ${scrolled ? 'scrolled' : 'not-scrolled'}`}>
@@ -35,96 +26,35 @@ const NavBar = () => {
                     <img src="/images/logos/wLogo.png" alt="D-CodeHood" />
                 </a>
 
-                {/* Desktop Navigation */}
-                <nav className='desktop'>
-                    <ul>
-                        {navLinks.map(({ link, name }) => {
-                            const isRoute = link.startsWith('/')
-                            const NavItem = isRoute ? Link : 'a'
-                            const navProp = isRoute ? { to: link } : { href: link }
-                            return (
-                                <li key={name} className='group'>
-                                    <NavItem {...navProp}>
-                                        <span>
-                                            {name}
-                                        </span>
-                                        <span className='underline'></span>
-                                    </NavItem>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </nav>
+                <div className='flex items-center gap-3'>
+                    {/* Command Palette Trigger */}
+                    <button
+                        type='button'
+                        onClick={() => window.dispatchEvent(new CustomEvent('dch:command-palette'))}
+                        className='desktop-only flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 text-blue-50 hover:text-white-50 hover:border-white/20 transition-colors duration-300'
+                        aria-label='Open command palette'
+                    >
+                        <Search size={14} />
+                        <kbd className='font-mono text-[10px]'>⌘K</kbd>
+                    </button>
 
-                {/* Mobile Menu Button */}
-                <button
-                    className='mobile-menu-btn'
-                    onClick={toggleMobileMenu}
-                    aria-label="Toggle mobile menu"
-                    aria-expanded={mobileMenuOpen}
-                >
-                    <div className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </button>
-
-                {/* Command Palette Trigger */}
-                <button
-                    type='button'
-                    onClick={() => window.dispatchEvent(new CustomEvent('dch:command-palette'))}
-                    className='desktop-only flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 text-blue-50 hover:text-white-50 hover:border-white/20 transition-colors duration-300'
-                    aria-label='Open command palette'
-                >
-                    <Search size={14} />
-                    <kbd className='font-mono text-[10px]'>⌘K</kbd>
-                </button>
-
-                {/* Desktop Contact Button */}
-                <a ref={contactBtnRef} href="#contact" className='contact-btn group desktop-only'>
-                    <div className='inner'>
-                        <span>Contact Me</span>
-                    </div>
-                </a>
+                    {/* Menu Trigger */}
+                    <button
+                        className='menu-trigger'
+                        onClick={toggleMenu}
+                        aria-label="Toggle menu"
+                        aria-expanded={menuOpen}
+                    >
+                        <div className={`hamburger ${menuOpen ? 'open' : ''}`}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
             </div>
 
-            {/* Mobile Navigation Menu */}
-            <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
-                <nav className='mobile-nav'>
-                    <ul>
-                        {navLinks.map(({ link, name }) => {
-                            const isRoute = link.startsWith('/')
-                            const NavItem = isRoute ? Link : 'a'
-                            const navProp = isRoute ? { to: link } : { href: link }
-                            return (
-                                <li key={name}>
-                                    <NavItem {...navProp} onClick={closeMobileMenu}>
-                                        {name}
-                                    </NavItem>
-                                </li>
-                            )
-                        })}
-                        <li>
-                            <a
-                                href="#contact"
-                                onClick={closeMobileMenu}
-                                className='!bg-accent !text-white-50 text-center font-semibold mt-2'
-                            >
-                                Contact Me
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
-            {/* Mobile Menu Overlay */}
-            {mobileMenuOpen && (
-                <div
-                    className='mobile-menu-overlay'
-                    onClick={closeMobileMenu}
-                ></div>
-            )}
+            <FullScreenMenu open={menuOpen} onClose={closeMenu} />
         </header>
     )
 }
