@@ -56,14 +56,14 @@ const ExperenceSection = () => {
     }, [])
 
     return (
-        <div id='experience' className='sec w-full md:mt-40 mt-20 section-padding xl:px-0 pb-24 relative'>
+        <div id='experience' className='sec w-full section-padding xl:px-0 relative'>
             <div className='w-full h-full md:px-20'>
                 <TitleHeader
                     title="Work Experience"
                     sub="My Career Overview"
                 />
 
-                <div className='h-[800px] w-[800px] rounded-full bg-gradient-to-tl from-[#010db6] absolute -bottom-72 -right-72 blur-3xl opacity-90'></div>
+                <div className='h-[800px] w-[800px] rounded-full bg-gradient-to-tl from-accent/25 to-transparent absolute -bottom-72 -right-72 blur-3xl'></div>
                 <div className='mt-32 relative'>
                     <div className='relative z-50 xl:space-y-32 space-y-10'>
                         {expCards.map((card, index) => (
@@ -91,7 +91,7 @@ const ExperenceSection = () => {
                                             <div>
                                                 <h1 className='font-semibold text-3xl'>{card.title}</h1>
                                                 <p className='my-5 text-white-50'>{card.date}</p>
-                                                <p className='text-[#839cb5]'>Responsibilities</p>
+                                                <p className='text-blue-50 text-sm uppercase tracking-wide'>Responsibilities</p>
                                                 <ul className='list-disc mx-1 mt-5 flex flex-col gap-5 text-white-50'>
                                                     {card.responsibilities.map((responsibility) => (
                                                         <li key={responsibility} className='text-lg'>

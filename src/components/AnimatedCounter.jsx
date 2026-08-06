@@ -46,8 +46,8 @@ const AnimatedCounter = () => {
         <div id='counter' className='padding-x-lg lg:mt-32 xl:mt-0'>
             <div ref={counterRef} className='mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                 {counterItems.map((item, index) => (
-                    <div key={item.label || index} className='counter-item bg-zinc-900 rounded-xl p-10 flex flex-col justify-center'>
-                        <div className='counter-number text-white text-5xl font-bold mb-2' data-countup-id={`counter-${index}`}>
+                    <div key={item.label || index} className='counter-item card-border rounded-xl p-10 flex flex-col justify-center'>
+                        <div className='counter-number text-white-50 text-5xl font-bold mb-2' data-countup-id={`counter-${index}`}>
                             <CountUp
                                 suffix={item.suffix}
                                 end={item.value}
@@ -61,7 +61,7 @@ const AnimatedCounter = () => {
                                 scrollSpyOnce={true}
                             />
                         </div>
-                        <div className='text-white-50 text-lg'>
+                        <div className='text-blue-50 text-lg'>
                             {item.label}
                         </div>
                     </div>

@@ -27,7 +27,7 @@ const NavBar = () => {
         <header className={`navbar ${scrolled ? 'scrolled' : 'not-scrolled'}`}>
             <div className='inner'>
                 <a className='logo' href="#hero">
-                    <img src="/images/logos/wLogo.png" className='h-20' alt="Logo" />
+                    <img src="/images/logos/wLogo.png" alt="D-CodeHood" />
                 </a>
 
                 {/* Desktop Navigation */}
@@ -47,10 +47,11 @@ const NavBar = () => {
                 </nav>
 
                 {/* Mobile Menu Button */}
-                <button 
+                <button
                     className='mobile-menu-btn'
                     onClick={toggleMobileMenu}
                     aria-label="Toggle mobile menu"
+                    aria-expanded={mobileMenuOpen}
                 >
                     <div className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}>
                         <span></span>
@@ -78,8 +79,12 @@ const NavBar = () => {
                                 </a>
                             </li>
                         ))}
-                        <li className='contact-btn'>
-                            <a href="#contact" onClick={closeMobileMenu}>
+                        <li>
+                            <a
+                                href="#contact"
+                                onClick={closeMobileMenu}
+                                className='!bg-accent !text-white-50 text-center font-semibold mt-2'
+                            >
                                 Contact Me
                             </a>
                         </li>
@@ -89,7 +94,7 @@ const NavBar = () => {
 
             {/* Mobile Menu Overlay */}
             {mobileMenuOpen && (
-                <div 
+                <div
                     className='mobile-menu-overlay'
                     onClick={closeMobileMenu}
                 ></div>

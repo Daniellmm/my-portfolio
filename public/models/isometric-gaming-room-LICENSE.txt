@@ -1,0 +1,11 @@
+Model Information:
+* title:	Isometric Gaming Room
+* source:	https://sketchfab.com/3d-models/isometric-gaming-room-acb7828967a541348a645800ff1c2a9b
+* author:	robbyrefta (https://sketchfab.com/robbyrefta)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Isometric Gaming Room" (https://sketchfab.com/3d-models/isometric-gaming-room-acb7828967a541348a645800ff1c2a9b) by robbyrefta (https://sketchfab.com/robbyrefta) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

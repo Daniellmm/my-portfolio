@@ -4,7 +4,7 @@ const navLinks = [
     link: "/",
   },
   {
-    name: "Project",
+    name: "Projects",
     link: "/projects",
   },
   {
@@ -73,81 +73,22 @@ const logoIconsList = [
 
 const abilities = [
   {
-    imgPath: "/images/seo.png",
     title: "Quality Focus",
     desc: "Delivering high-quality results while maintaining attention to every detail.",
   },
   {
-    imgPath: "/images/chat.png",
     title: "Reliable Communication",
     desc: "Keeping you updated at every step to ensure transparency and clarity.",
   },
   {
-    imgPath: "/images/time.png",
     title: "On-Time Delivery",
     desc: "Making sure projects are completed on schedule, with quality & attention to detail.",
   },
 ];
 
-const techStackImgs = [
-  {
-    name: "React Developer",
-    imgPath: "/images/logos/react.png",
-  },
-  {
-    name: "Python Developer",
-    imgPath: "/images/logos/python.svg",
-  },
-  {
-    name: "Backend Developer",
-    imgPath: "/images/logos/node.png",
-  },
-  {
-    name: "Interactive Developer",
-    imgPath: "/images/logos/three.png",
-  },
-  {
-    name: "Project Manager",
-    imgPath: "/images/logos/git.svg",
-  },
-];
-
-const techStackIcons = [
-  {
-    name: "React Developer",
-    modelPath: "/models/react_logo-transformed.glb",
-    scale: 1,
-    rotation: [0, 0, 0],
-  },
-  {
-    name: "Python Developer",
-    modelPath: "/models/python-transformed.glb",
-    scale: 0.8,
-    rotation: [0, 0, 0],
-  },
-  {
-    name: "Backend Developer",
-    modelPath: "/models/node-transformed.glb",
-    scale: 5,
-    rotation: [0, -Math.PI / 2, 0],
-  },
-  {
-    name: "Interactive Developer",
-    modelPath: "/models/three.js-transformed.glb",
-    scale: 0.05,
-    rotation: [0, 0, 0],
-  },
-  {
-    name: "Project Manager",
-    modelPath: "/models/git-svg-transformed.glb",
-    scale: 0.05,
-    rotation: [0, -Math.PI / 4, 0],
-  },
-];
-
 const expCards = [
   {
-    review: "Daniel brought creativity and technical expertise to the team, significantly building frontend applictions with great performance. His work has been invaluable in delivering faster experiences.",
+    review: "Daniel brought creativity and technical expertise to the team, significantly building frontend applications with great performance. His work has been invaluable in delivering faster experiences.",
     imgPath: "/images/logos/relix.png",
     logoPath: "/images/logos/relix.png",
     title: "Frontend Developer",
@@ -159,7 +100,7 @@ const expCards = [
     ],
   },
   {
-    review: "Daniel contributions to Remeda Studio portfolio website have been outstanding. He approaches challenges with a problem-solving mindset.",
+    review: "Daniel's contributions to Remeda Studio's portfolio website have been outstanding. He approaches challenges with a problem-solving mindset.",
     imgPath: "/images/logos/remeda2.png",
     logoPath: "/images/logos/remeda2.png",
     title: "Full Stack Developer",
@@ -171,7 +112,7 @@ const expCards = [
     ],
   },
   {
-    review: "Daniel work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
+    review: "Daniel's work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
     imgPath: "/images/exp3.png",
     logoPath: "/images/logo3.png",
     title: "Mobile App Developer (Flutter & Dart)",
@@ -184,35 +125,20 @@ const expCards = [
   },
 ];
 
-const expLogos = [
-  {
-    name: "logo1",
-    imgPath: "/images/logo1.png",
-  },
-  {
-    name: "logo2",
-    imgPath: "/images/logo2.png",
-  },
-  {
-    name: "logo3",
-    imgPath: "/images/logo3.png",
-  },
-];
-
 
 const skillImages = [
-  {imgPath: "/images/logos/nextjs.png", name: "Next.js", color: "from-black to-gray-800"},
-  {imgPath: "/images/logos/react.png", name: "React", color: "from-blue-400 to-blue-600"},
-  {imgPath: "/images/logos/node.png", name: "Node.js", color: "from-green-400 to-green-600"},
-  {imgPath: "/images/logos/flutter.png", name: "Flutter", color: "from-blue-300 to-blue-500"},
-  {imgPath: "/images/logos/dart.png", name: "Dart", color: "from-blue-600 to-indigo-600"},
-  {imgPath: "/images/logos/js.png", name: "JavaScript", color: "from-yellow-400 to-yellow-600"},
-  {imgPath: "/images/logos/html.png", name: "HTML5", color: "from-orange-400 to-red-500"},
-  {imgPath: "/images/logos/css.png", name: "CSS3", color: "from-blue-400 to-blue-600"},
-  {imgPath: "/images/logos/git.png", name: "Git", color: "from-orange-500 to-red-600"},
-  {imgPath: "/images/logos/api.png", name: "REST API", color: "from-purple-400 to-purple-600"},
-  {imgPath: "/images/logos/three.png", name: "Three.js", color: "from-gray-600 to-gray-800"},
-  {imgPath: "/images/logos/express.png", name: "Express.js", color: "from-gray-700 to-black"},
+  {imgPath: "/images/logos/nextjs.png", name: "Next.js"},
+  {imgPath: "/images/logos/react.png", name: "React"},
+  {imgPath: "/images/logos/node.png", name: "Node.js"},
+  {imgPath: "/images/logos/flutter.png", name: "Flutter"},
+  {imgPath: "/images/logos/dart.png", name: "Dart"},
+  {imgPath: "/images/logos/js.png", name: "JavaScript"},
+  {imgPath: "/images/logos/html.png", name: "HTML5"},
+  {imgPath: "/images/logos/css.png", name: "CSS3"},
+  {imgPath: "/images/logos/git.png", name: "Git"},
+  {imgPath: "/images/logos/api.png", name: "REST API"},
+  {imgPath: "/images/logos/three.png", name: "Three.js"},
+  {imgPath: "/images/logos/express.png", name: "Express.js"},
 ]
 
 const testimonials = [
@@ -265,10 +191,7 @@ export {
   logoIconsList,
   counterItems,
   expCards,
-  expLogos,
   testimonials,
   socialImgs,
-  techStackIcons,
-  techStackImgs,
   navLinks,
 };

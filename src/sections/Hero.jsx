@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { words } from '../constants'
 import Button from '../components/Button'
-import HeroExperience from '../components/HeroModels/HeroExperience'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import AnimatedCounter from '../components/AnimatedCounter'
 
+const HeroExperience = lazy(() => import('../components/HeroModels/HeroExperience'))
 
 const Hero = () => {
 
@@ -26,20 +26,18 @@ const Hero = () => {
   })
   return (
     <div id='hero' className='sec relative overflow-hidden'>
-      <div className=' absolute top-0 left-0 z-10'>
-        <img src="/images/bg.png" alt="backgroung" />
-      </div>
+      <div className='grid-pattern' />
 
       <div className='hero-layout flex flex-col md:flex-row justify-center items-center gap-y-10'>
         {/* left side for the text  */}
-        <header className='flex flex-co justify-center items-start md:w-full w-screen md:px-20 px-5'>
+        <header className='flex justify-start items-start md:w-full w-screen md:px-20 px-5'>
           <div className='flex flex-col gap-7'>
             <div className='hero-text'>
               <h1>Shaping
                 <span className='slide'>
                   <span className='wrapper'>
-                    {words.map((word) => (
-                      <span key={word.text} className='flex items-center pr-5 gap-1 md:gap-3 pb-2'>
+                    {words.map((word, index) => (
+                      <span key={`${word.text}-${index}`} className='flex items-center pr-5 gap-1 md:gap-3 pb-2'>
                         <img src={word.imgPath}
                           alt={word.text}
                           className='xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white/50'
@@ -53,12 +51,12 @@ const Hero = () => {
                   </span>
                 </span>
               </h1>
-              <h1>into Real Project</h1>
-              <h1>that Deliver Results </h1>
+              <h1>into Real Projects</h1>
+              <h1>that Deliver Results</h1>
             </div>
 
-            <p className=' text-white-50 md:text-xl relative z-10 pointer-events-none'>
-              Hi I am Daniel a sessioned developer with a passion for code
+            <p className='text-blue-50 md:text-xl relative z-10 pointer-events-none max-w-lg'>
+              Hi, I&apos;m Daniel — a seasoned developer with a passion for crafting products that feel as good as they perform.
             </p>
 
             <Button
@@ -69,21 +67,12 @@ const Hero = () => {
           </div>
         </header>
 
-        <div className='w-full flex justify-center items-center '>
-          <div className=' h-[350px] w-[350px] rounded-[100%]'>
-            <img src="/images/client1.png" alt="" className='h-full w-full rounded-full' />
-          </div>
-        </div>
-
         {/* right side for the 3d model */}
-        {/* <figure>
-          <div className='hero-3d-layout'>
+        <figure className='hero-3d-layout'>
+          <Suspense fallback={null}>
             <HeroExperience />
-          </div>
-        </figure> */}
-
-        {/* i think for now i will add anothen thing here */}
-
+          </Suspense>
+        </figure>
       </div>
       <div className='mt-24 md:mt-5'>
         <AnimatedCounter />

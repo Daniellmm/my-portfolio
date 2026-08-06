@@ -13,6 +13,7 @@ const Contact = () => {
     })
 
     const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState('idle'); // idle | success | error
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,8 +25,8 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
         setLoading(true);
+        setStatus('idle');
         try {
             await emailjs.sendForm(
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -33,14 +34,15 @@ const Contact = () => {
                 formRef.current,
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY
             )
-            // Reset form
             setFormData({
                 name: '',
                 email: '',
                 message: ''
             });
+            setStatus('success');
         } catch (error) {
-            console.log('EMAILJS ERROR: ', error);
+            console.error('EMAILJS ERROR: ', error);
+            setStatus('error');
         } finally {
             setLoading(false);
         }
@@ -49,26 +51,24 @@ const Contact = () => {
 
 
     return (
-        <div id='contact' className='sec flex-center srction-padding'>
-            <div className='w-full h-full md:px-10 px-1 flex-center section-padding relative overflow-hidden py-10'>
-                <div className='w-full h-full md:px-10 px-1'>
+        <div id='contact' className='sec flex-center section-padding'>
+            <div className='w-full h-full md:px-10 px-1 flex-center relative overflow-hidden'>
+                <div className='grid-pattern' />
+
+                <div className='w-full h-full md:px-10 px-1 relative z-10'>
                     <TitleHeader
                         title='Get In Touch'
                         sub='Contact Me'
                     />
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-10">
-                        <div className='absolute inset-0 opacity-10'>
-                            <div className='absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500'></div>
-                        </div>
                         {/* Left: Contact Form */}
-                        <form onSubmit={handleSubmit} ref={formRef} className="md:col-span-7 relative col-span-12 flex flex-col gap-6 bg-tertiary p-8 rounded-2xl shadow-lg">
+                        <form onSubmit={handleSubmit} ref={formRef} className="md:col-span-7 relative col-span-12 flex flex-col gap-6 card-border p-8 rounded-2xl">
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="name" className="text-white font-semibold">Name</label>
+                                <label htmlFor="name" className="text-white-50 font-semibold">Name</label>
                                 <input
                                     type="text"
                                     id="name"
                                     name="name"
-                                    className="input"
                                     placeholder="Your Name"
                                     onChange={handleChange}
                                     value={formData.name}
@@ -76,12 +76,11 @@ const Contact = () => {
                                 />
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="email" className="text-white font-semibold">Email</label>
+                                <label htmlFor="email" className="text-white-50 font-semibold">Email</label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
-                                    className="input"
                                     onChange={handleChange}
                                     value={formData.email}
                                     placeholder="your@email.com"
@@ -89,12 +88,11 @@ const Contact = () => {
                                 />
                             </div>
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="message" className="text-white font-semibold">Message</label>
+                                <label htmlFor="message" className="text-white-50 font-semibold">Message</label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     rows="5"
-                                    className="input"
                                     onChange={handleChange}
                                     value={formData.message}
                                     placeholder="Type your message..."
@@ -103,8 +101,9 @@ const Contact = () => {
                             </div>
                             <button
                                 disabled={loading}
-                                onClick={handleSubmit}
-                                type="submit">
+                                type="submit"
+                                className='disabled:opacity-60 disabled:cursor-not-allowed'
+                            >
                                 <div className='cta-button group'>
                                     <div className='bg-circle' />
                                     <p className='text'>{loading ? 'Sending...' : 'Send Message'}</p>
@@ -112,15 +111,25 @@ const Contact = () => {
                                         <img src="/images/arrow-down.svg" alt="arrow" />
                                     </div>
                                 </div>
-
                             </button>
+
+                            {status === 'success' && (
+                                <p role="status" className='text-sm text-center text-accent'>
+                                    Message sent — thanks for reaching out, I&apos;ll reply soon.
+                                </p>
+                            )}
+                            {status === 'error' && (
+                                <p role="alert" className='text-sm text-center text-red-400'>
+                                    Something went wrong sending that. Please try again in a moment.
+                                </p>
+                            )}
                         </form>
                         {/* Right: Image */}
                         <div className="md:col-span-5 col-span-12 flex items-center justify-center relative">
                             <img
                                 src="/images/contact.png"
                                 alt="Contact"
-                                className="  rounded-xl object-cover shadow-md"
+                                className="rounded-2xl object-cover w-full h-full card-border"
                             />
                         </div>
                     </div>

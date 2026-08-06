@@ -7,7 +7,6 @@ import TechStack from "../sections/TechStack"
 import TestimonialSection from "../sections/TestimonialSection"
 import Contact from "../sections/Contact"
 import LogoSection from "../sections/LogoSection"
-import IconSection from '../sections/IconSection'
 
 
 const HomePage = () => {
@@ -16,7 +15,6 @@ const HomePage = () => {
             <Hero />
             <ShowcaseSection />
             <LogoSection />
-            <IconSection />
             <FeatureCards />
             <ExperenceSection />
             <TechStack />
