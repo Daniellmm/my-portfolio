@@ -13,6 +13,7 @@ import CommandPalette from "./components/CommandPalette"
 import HomePage from "./pages/HomePage"
 import NotFound from "./pages/NotFound"
 
+const About = lazy(() => import("./pages/About"))
 const Projects = lazy(() => import("./pages/Projects"))
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail.jsx"))
 
@@ -50,6 +51,7 @@ const App = () => {
       <Suspense fallback={<div className="min-h-screen bg-black-100" />}>
         <PageTransition>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="*" element={<NotFound />} />

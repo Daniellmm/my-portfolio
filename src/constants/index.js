@@ -9,7 +9,7 @@ const navLinks = [
   },
   {
     name: "About",
-    link: "#skills",
+    link: "/about",
   },
   {
     name: "Testimonials",

@@ -183,7 +183,7 @@ const TechStack = () => {
                 </li>
                 <li className='list-disc text-lg text-blue-50'>
                   <span className='text-white-50 font-bold'>Back-End: </span>
-                 Nest.JS Node.JS, Express.JS.
+                  Nest.JS, Node.JS, Express.JS.
                 </li>
                 <li className='list-disc text-lg text-blue-50'>
                   <span className='text-white-50 font-bold'>Mobile App: </span>

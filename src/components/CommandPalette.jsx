@@ -32,7 +32,7 @@ const CommandPalette = () => {
     const commands = useMemo(() => [
         { label: 'Home', hint: 'Back to the top', action: () => navigate('/') },
         { label: 'Projects', hint: 'Selected work', action: () => navigate('/projects') },
-        { label: 'About', hint: 'Skills & tech stack', action: () => goToSection('skills') },
+        { label: 'About', hint: 'Skills, experience & story', action: () => navigate('/about') },
         { label: 'Testimonials', hint: 'What clients say', action: () => goToSection('testimonials') },
         { label: 'Contact', hint: 'Get in touch', action: () => goToSection('contact') },
         // eslint-disable-next-line react-hooks/exhaustive-deps
