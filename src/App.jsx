@@ -1,10 +1,11 @@
-import { lazy, Suspense, useEffect } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Lenis from "lenis"
 import NavBar from "./components/NavBar"
 import Footer from "./components/Footer"
+import Preloader from "./components/Preloader"
 import HomePage from "./pages/HomePage"
 
 const Projects = lazy(() => import("./pages/Projects"))
@@ -13,6 +14,8 @@ const ProjectDetail = lazy(() => import("./pages/ProjectDetail.jsx"))
 gsap.registerPlugin(ScrollTrigger)
 
 const App = () => {
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -34,6 +37,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      {loading && <Preloader onComplete={() => setLoading(false)} />}
       <NavBar />
       <Suspense fallback={<div className="min-h-screen bg-black-100" />}>
         <Routes>

@@ -1,11 +1,13 @@
 import { OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 import { GamingRoom } from './GamingRoom';
 import GamingRoomLights from './GamingRoomLights';
 
 const HeroExperience = () => {
 
+    const navigate = useNavigate();
     const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
@@ -31,7 +33,7 @@ const HeroExperience = () => {
                 position={[0, -2.4, 0]}
                 rotation={[0, -Math.PI / 4, 0]}
             >
-                <GamingRoom />
+                <GamingRoom onScreenClick={() => navigate('/projects')} />
             </group>
         </Canvas>
     )
