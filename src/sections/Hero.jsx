@@ -68,7 +68,7 @@ const Hero = () => {
         </header>
 
         {/* right side for the 3d model */}
-        <figure className='hero-3d-layout'>
+        <figure className='hero-3d-layout cursor-canvas'>
           <Suspense fallback={null}>
             <HeroExperience />
           </Suspense>

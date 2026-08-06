@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar"
 import Footer from "./components/Footer"
 import Preloader from "./components/Preloader"
 import PageTransition from "./components/PageTransition"
+import CustomCursor from "./components/CustomCursor"
 import HomePage from "./pages/HomePage"
 
 const Projects = lazy(() => import("./pages/Projects"))
@@ -38,6 +39,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <CustomCursor />
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       <NavBar />
       <Suspense fallback={<div className="min-h-screen bg-black-100" />}>

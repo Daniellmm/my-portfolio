@@ -1,10 +1,13 @@
 import { navLinks } from '../constants'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useMagnetic } from '../hooks/useMagnetic'
 
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const contactBtnRef = useRef(null);
+    useMagnetic(contactBtnRef, { strength: 0.25, radius: 70 });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -67,7 +70,7 @@ const NavBar = () => {
                 </button>
 
                 {/* Desktop Contact Button */}
-                <a href="#contact" className='contact-btn group desktop-only'>
+                <a ref={contactBtnRef} href="#contact" className='contact-btn group desktop-only'>
                     <div className='inner'>
                         <span>Contact Me</span>
                     </div>

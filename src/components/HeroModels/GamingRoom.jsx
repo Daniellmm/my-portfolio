@@ -28,12 +28,12 @@ export function GamingRoom({ onScreenClick, ...props }) {
         onPointerOver={(e) => {
           e.stopPropagation()
           setScreenHovered(true)
-          document.body.style.cursor = 'pointer'
+          window.dispatchEvent(new CustomEvent('dch:cursor', { detail: { state: 'hover' } }))
         }}
         onPointerOut={(e) => {
           e.stopPropagation()
           setScreenHovered(false)
-          document.body.style.cursor = 'auto'
+          window.dispatchEvent(new CustomEvent('dch:cursor', { detail: { state: 'canvas' } }))
         }}
       >
         {screenHovered && (

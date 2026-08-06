@@ -1,6 +1,13 @@
+import { useRef } from 'react'
+import { useMagnetic } from '../hooks/useMagnetic'
+
 const Button = ({ text, className, id }) => {
+  const ref = useRef(null)
+  useMagnetic(ref)
+
   return (
     <a
+      ref={ref}
       onClick={
         (e) => {
           e.preventDefault()
