@@ -12,6 +12,7 @@ import ScrollProgress from "./components/ScrollProgress"
 import CommandPalette from "./components/CommandPalette"
 import HomePage from "./pages/HomePage"
 import NotFound from "./pages/NotFound"
+import { useTabTitleBlur } from "./hooks/useTabTitleBlur"
 
 const About = lazy(() => import("./pages/About"))
 const Projects = lazy(() => import("./pages/Projects"))
@@ -21,6 +22,8 @@ gsap.registerPlugin(ScrollTrigger)
 
 const App = () => {
   const [loading, setLoading] = useState(true)
+
+  useTabTitleBlur()
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -43,6 +46,13 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <div
+        className="grain-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
       <CustomCursor />
       <ScrollProgress />
       <CommandPalette />
