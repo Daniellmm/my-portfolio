@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { words } from '../constants'
 import Button from '../components/Button'
 import { useGSAP } from '@gsap/react'
@@ -8,6 +8,18 @@ import AnimatedCounter from '../components/AnimatedCounter'
 const HeroExperience = lazy(() => import('../components/HeroModels/HeroExperience'))
 
 const Hero = () => {
+  const [readyFor3D, setReadyFor3D] = useState(false)
+
+  useEffect(() => {
+    const idle = window.requestIdleCallback
+      ? window.requestIdleCallback(() => setReadyFor3D(true), { timeout: 1500 })
+      : setTimeout(() => setReadyFor3D(true), 200)
+
+    return () => {
+      if (window.cancelIdleCallback) window.cancelIdleCallback(idle)
+      else clearTimeout(idle)
+    }
+  }, [])
 
   useGSAP(() => {
     gsap.fromTo('.hero-text h1',
@@ -69,9 +81,11 @@ const Hero = () => {
 
         {/* right side for the 3d model */}
         <figure className='hero-3d-layout cursor-canvas'>
-          <Suspense fallback={null}>
-            <HeroExperience />
-          </Suspense>
+          {readyFor3D && (
+            <Suspense fallback={null}>
+              <HeroExperience />
+            </Suspense>
+          )}
         </figure>
       </div>
       <div className='mt-24 md:mt-5'>

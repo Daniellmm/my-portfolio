@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import TitleHeader from '../components/TitleHeader'
-import emailjs from '@emailjs/browser';
 import { Mail, MapPin, Github, MessageCircle, Send } from 'lucide-react';
 
 const EMAIL = 'contact@dcodehood.com';
@@ -40,6 +39,7 @@ const Contact = () => {
         setLoading(true);
         setStatus('idle');
         try {
+            const { default: emailjs } = await import('@emailjs/browser');
             await emailjs.sendForm(
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
                 import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
